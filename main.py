@@ -24,15 +24,17 @@ ost_list = ['ost_1.mp3', 'ost_2.mp3', 'ost_3.mp3', 'ost_4.mp3', 'ost_5.mp3', 'os
             'ost_16.mp3', 'ost_17, ost_18']
 speak_list = ['speak_1.mp3', 'speak_2.mp3', 'speak_3.mpz`3', 'speak_4.mp3', 'speak_5.mp3', 'speak_6.mp3', 'speak_7.mp3',
               'speak_8.mp3', 'speak_9.mp3', 'speak_10.mp3']
-magica_characters = ['Kyosuke', 'Madoka', 'Homura' 'Mami', 'Sayaka' 'Kyoko', 'Hitomi']
-magica_pictures = [
-    'https://static.wikia.nocookie.net/villains/images/3/36/Kyubey2.png/revision/latest?cb=20160427035119',
-    'https://static.wikia.nocookie.net/madoka/images/c/c9/Yachiyo_Profile.png/revision/latest?cb=20200130194756',
-    'https://static.wikia.nocookie.net/madoka/images/7/7c/Rena.png/revision/latest?cb=20201224204513',
-    'https://static.wikia.nocookie.net/madoka/images/1/16/Momoko_ref.png/revision/latest/top-crop/width/360/height/450?cb=20201225084732',
-    'https://static.wikia.nocookie.net/madoka/images/2/2a/Iroha_Character.png/revision/latest?cb=20200528195609',
-    'https://static.wikia.nocookie.net/magiarecord-en/images/b/bf/Akino_Kaede_Akino_Kaede.png/revision/latest?cb=20190714034621']
-
+magica_characters = [
+    'Kyosuke https://static.wikia.nocookie.net/madoka/images/8/87/KyosukeCharacterDesignWebsite.png/revision/latest/scale-to-width/360?cb=20150715030458',
+    'Madoka https://davedalessiowrites.files.wordpress.com/2020/03/madoka-kaname.png',
+    'Homura https://i.pinimg.com/originals/90/ed/92/90ed9250ac172a0b0ce97d145d891b63.png',
+    'Mami https://static.wikia.nocookie.net/mugen/images/0/0b/Tomoe_Mami.png/revision/latest?cb=20180423040637',
+    'Sayaka https://static.wikia.nocookie.net/characterprofile/images/f/f5/Sayaka_Miki%2C_Madoka_Kaname%27s_Protector.png/revision/latest?cb=20160109071921',
+    'Kyoko https://static.wikia.nocookie.net/madoka/images/c/cb/Kyoko_magical_outfit_1.png/revision/latest/scale-to-width-down/238?cb=20160821020253',
+    'Hitomi https://static.wikia.nocookie.net/all-worlds-alliance/images/f/f8/Hitomi-shizuki.png/revision/latest?cb=20180529035937']
+fact_list = ['here are actually a fair few subjects Madoka dislikes, being English, Science, Chemistry, and she also notes a dislike of Physical Education, due to her low fortitude.',
+             'Madoka is in two clubs, both the gardening and crafts clubs.',
+             '',]
 
 # couple command
 @client.command()
@@ -123,14 +125,26 @@ async def stop(ctx):
 # Magica command
 @client.command()
 async def magica(message):
-    await message.channel.send("Heres a random one..." + random.choice(magica_characters) + " is a good charecter! (I think..)")
+    await message.channel.send(
+        "Heres a random one... " + random.choice(magica_characters) + " is a good charecter! (I think..)")
 
+
+# Rebellion command
+# Waiting
+
+# Fact Command
+@client.command()
+async def fact(message):
+    await message.channel.send(
+        "No. Command in progress")
+# (random.choice(fact_list))
 
 # status
 @client.event
 async def on_ready():
     await client.change_presence(
-        activity=discord.Activity(type=discord.ActivityType.watching, name='TOO MANY NAGITO EDITS!!'))
+        activity=discord.Activity(type=discord.ActivityType.watching,
+                                  name='TO MANY NAGITO EDITS | k!help | v1.0.1, day idk of making this bot | Bot Made By xx-jake-xx#5302'))
 
 
 # @client.event
@@ -144,7 +158,11 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if "madoka" in message.content:
+    if message.author == client.user:
+        return
+    if message.author.bot: return
+
+    if "Madoka" in message.content:
         await message.channel.send("✨being Meguca is suffering✨")
 
     if "magical girl" in message.content:
@@ -152,24 +170,6 @@ async def on_message(message):
 
     if "meguca" in message.content:
         await message.channel.send("✨being Meguca is suffering✨")
-
-    if "kyubey" in message.content:
-        await message.channel.send("https://static.wikia.nocookie.net/villains/images/3/36/Kyubey2.png/revision/latest?cb=20160427035119")
-
-    if "Yachiyo Nanami" in message.content:
-        await message.channel.send("https://static.wikia.nocookie.net/madoka/images/c/c9/Yachiyo_Profile.png/revision/latest?cb=20200130194756")
-
-    if "Rena Minami" in message.content:
-        await message.channel.send("https://static.wikia.nocookie.net/madoka/images/7/7c/Rena.png/revision/latest?cb=20201224204513")
-
-    if "Momoko Togame" in message.content:
-        await message.channel.send("https://static.wikia.nocookie.net/madoka/images/1/16/Momoko_ref.png/revision/latest/top-crop/width/360/height/450?cb=20201225084732")
-
-    if "Iroha Tamaki" in message.content:
-        await message.channel.send("https://static.wikia.nocookie.net/madoka/images/2/2a/Iroha_Character.png/revision/latest?cb=20200528195609")
-
-    if "Kaede Akino" in message.content:
-        await message.channel.send("https://static.wikia.nocookie.net/magiarecord-en/images/b/bf/Akino_Kaede_Akino_Kaede.png/revision/latest?cb=20190714034621")
 
     if "sayaka" in message.content:
         await message.add_reaction('\U00002764')
