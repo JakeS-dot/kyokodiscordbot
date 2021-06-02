@@ -6,7 +6,7 @@ import random
 
 # Credentials
 
-TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.eCwrLl7yBwzOVJMctYTyVwZc2JE'
+TOKEN = 'ODQ0NzA2NjQzOTM2OTM1OTg3.YKWUXQ.Nv7tkuzZmg1ssug0flOwkWNWQfM'
 
 # Create bot
 client = commands.Bot(command_prefix='k!')
