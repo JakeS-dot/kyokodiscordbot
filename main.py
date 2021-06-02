@@ -19,11 +19,7 @@ ship_list = ['Madoka Kaname', 'Homura Akemi', 'Sayaka Miki', 'Mami Tomoe', 'Kyo(
 ship_dis = ['It would be so intense!', 'A nail biter!', 'Its the best pick I got!']
 place_sur = ['3rd', '2nd', ]
 death_sur = ['became a witch.', 'had your soul gem destroyed.', 'were killed by a witch. ']
-ost_list = ['ost_1.mp3', 'ost_2.mp3', 'ost_3.mp3', 'ost_4.mp3', 'ost_5.mp3', 'ost_6.mp3', 'ost_7.mp3', 'ost_8.mp3',
-            'ost_9.mp3', 'ost_10.mp3', 'ost_11.mp3', 'ost_12.mp3', 'ost_13.mp3', 'ost_14.mp3', 'ost_15.mp3',
-            'ost_16.mp3', 'ost_17, ost_18']
-speak_list = ['speak_1.mp3', 'speak_2.mp3', 'speak_3.mpz`3', 'speak_4.mp3', 'speak_5.mp3', 'speak_6.mp3', 'speak_7.mp3',
-              'speak_8.mp3', 'speak_9.mp3', 'speak_10.mp3']
+
 magica_characters = [
     'Kyosuke https://static.wikia.nocookie.net/madoka/images/8/87/KyosukeCharacterDesignWebsite.png/revision/latest/scale-to-width/360?cb=20150715030458',
     'Madoka https://davedalessiowrites.files.wordpress.com/2020/03/madoka-kaname.png',
