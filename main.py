@@ -1,5 +1,4 @@
 # Imports
-from winsound import Beep
 import discord
 from discord.ext import commands
 import random
@@ -202,5 +201,4 @@ async def on_message(message):
     await client.process_commands(message)
 
 
-Beep(1000, 300)
 client.run(TOKEN)
