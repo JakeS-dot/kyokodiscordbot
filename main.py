@@ -106,25 +106,6 @@ async def survival(ctx):
     await ctx.send(embed=embed_sur)
 
 
-# ost command
-@client.command()
-async def ost(message):
-    voice = await message.author.voice.channel.connect()
-    voice.play(discord.FFmpegPCMAudio(random.choice(ost_list)))
-
-
-# speak command
-@client.command()
-async def speak(message):
-    voice_s = await message.author.voice.channel.connect()
-    voice_s.play(discord.FFmpegPCMAudio(random.choice(speak_list)))
-
-
-# stop command
-@client.command()
-async def stop(ctx):
-    await ctx.voice_client.disconnect()
-
 
 # Magica command
 @client.command()
