@@ -81,16 +81,12 @@ async def help(ctx):
     embed_help.add_field(name="k!survival",
                          value="A command that randomly generates chances of surviving madoka magica",
                          inline=False)
-    embed_help.add_field(name="k!ost",
-                         value="Joins a voice call and plays a random ost from the Madoka Magica series (and some fan songs too!) (Have to be in a vc to use)",
-                         inline=False)
     embed_help.add_field(name="k!magica",
                          value="A command that randomly selects a character from the anime Madoka Magica",
                          inline=False)
     embed_help.add_field(name="k!rebellion ",
                          value="A command that randomly selects a character from Madoka Magica Rebellion",
                          inline=False)
-    embed_help.add_field(name="k!speak", value="I'll speak! (Have to be in a vc to use)", inline=False)
     embed_help.set_image(
         url='https://cdn.discordapp.com/attachments/783124120492572684/845654137286033448/2922757-7815334573-POTK-.png')
     await ctx.send(embed=embed_help)
