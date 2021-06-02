@@ -2,6 +2,7 @@
 import discord
 from discord.ext import commands
 import random
+#JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT BOT TESTER TOKEN, BUT KYOKO TOKEN
 
 # Credentials
 
