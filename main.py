@@ -160,7 +160,7 @@ async def rebellion(message):
 async def on_ready():
     await client.change_presence(
         activity=discord.Activity(type=discord.ActivityType.watching,
-                                  name='TO MANY NAGITO EDITS | k!help | v1.0.1, day idk of making this bot | Bot Made By xx-jake-xx#5302'))
+                                  name='TO MANY NAGITO EDITS | k!help | v1.0.2, day idk of making this bot | Bot Made By xx-jake-xx#5302'))
 
 
 # @client.event
