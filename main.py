@@ -6,7 +6,7 @@ import random
 
 # Credentials
 
-TOKEN = 'ODQ0NzA2NjQzOTM2OTM1OTg3.YKWUXQ.Nv7tkuzZmg1ssug0flOwkWNWQfM'
+TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.eCwrLl7yBwzOVJMctYTyVwZc2JE'
 
 # Create bot
 client = commands.Bot(command_prefix='k!')
@@ -32,9 +32,22 @@ magica_characters = [
     'Sayaka https://static.wikia.nocookie.net/characterprofile/images/f/f5/Sayaka_Miki%2C_Madoka_Kaname%27s_Protector.png/revision/latest?cb=20160109071921',
     'Kyoko https://static.wikia.nocookie.net/madoka/images/c/cb/Kyoko_magical_outfit_1.png/revision/latest/scale-to-width-down/238?cb=20160821020253',
     'Hitomi https://static.wikia.nocookie.net/all-worlds-alliance/images/f/f8/Hitomi-shizuki.png/revision/latest?cb=20180529035937']
-fact_list = ['here are actually a fair few subjects Madoka dislikes, being English, Science, Chemistry, and she also notes a dislike of Physical Education, due to her low fortitude.',
-             'Madoka is in two clubs, both the gardening and crafts clubs.',
-             '',]
+
+rebellion_characters = [
+    'Kyosuke https://static.wikia.nocookie.net/madoka/images/8/87/KyosukeCharacterDesignWebsite.png/revision/latest/scale-to-width/360?cb=20150715030458',
+    'Madoka https://davedalessiowrites.files.wordpress.com/2020/03/madoka-kaname.png',
+    'Homura https://i.pinimg.com/originals/90/ed/92/90ed9250ac172a0b0ce97d145d891b63.png',
+    'Mami https://static.wikia.nocookie.net/mugen/images/0/0b/Tomoe_Mami.png/revision/latest?cb=20180423040637',
+    'Sayaka https://static.wikia.nocookie.net/characterprofile/images/f/f5/Sayaka_Miki%2C_Madoka_Kaname%27s_Protector.png/revision/latest?cb=20160109071921',
+    'Kyoko https://static.wikia.nocookie.net/madoka/images/c/cb/Kyoko_magical_outfit_1.png/revision/latest/scale-to-width-down/238?cb=20160821020253',
+    'Hitomi https://static.wikia.nocookie.net/all-worlds-alliance/images/f/f8/Hitomi-shizuki.png/revision/latest?cb=20180529035937',
+    'Nagisa Momoe https://static.wikia.nocookie.net/magicalgirlmadokamagica/images/d/da/Nagisa_Momoe.png/revision/latest?cb=20150116234215']
+
+fact_list = [
+    'here are actually a fair few subjects Madoka dislikes, being English, Science, Chemistry, and she also notes a dislike of Physical Education, due to her low fortitude.',
+    'Madoka is in two clubs, both the gardening and crafts clubs.',
+    '', ]
+
 
 # couple command
 @client.command()
@@ -60,7 +73,7 @@ async def ship(ctx):
 @client.command()
 async def help(ctx):
     embed_help = discord.Embed(title="Help!",
-                               description="Well it seems like you need help. Noob. Anyways heres the commands you wanted.",
+                               description="Well it seems like you need help. Noob. Anyways here's the commands you wanted.",
                                color=0xa80000)
     embed_help.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
@@ -76,11 +89,6 @@ async def help(ctx):
                          inline=False)
     embed_help.add_field(name="k!rebellion ",
                          value="A command that randomly selects a character from Madoka Magica Rebellion",
-                         inline=False)
-    embed_help.add_field(name="k!record",
-                         value="A command that randomly selects a character from the anime Magia Record",
-                         inline=False)
-    embed_help.add_field(name="k!fact", value="A command that gives a random fact about the anime Madoka Magica",
                          inline=False)
     embed_help.add_field(name="k!speak", value="I'll speak! (Have to be in a vc to use)", inline=False)
     embed_help.set_image(
@@ -126,17 +134,25 @@ async def stop(ctx):
 @client.command()
 async def magica(message):
     await message.channel.send(
-        "Heres a random one... " + random.choice(magica_characters) + " is a good charecter! (I think..)")
+        "Here's a random one... " + random.choice(magica_characters) + " is a good character! (I think..)")
 
 
 # Rebellion command
+@client.command()
+async def rebellion(message):
+    await message.channel.send(
+        "Here's a random one... " + random.choice(rebellion_characters) + " is a good pick! (I think..)")
+
+
 # Waiting
 
 # Fact Command
-@client.command()
-async def fact(message):
-    await message.channel.send(
-        "No. Command in progress")
+# @client.command()
+# async def fact(message):
+#    await message.channel.send(
+#        "No. Command in progress")
+
+
 # (random.choice(fact_list))
 
 # status
