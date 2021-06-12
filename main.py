@@ -2,11 +2,12 @@
 import discord
 from discord.ext import commands
 import random
-#JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT BOT TESTER TOKEN, BUT KYOKO TOKEN
+
+# JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT BOT TESTER TOKEN, BUT KYOKO TOKEN
 
 # Credentials
-
-TOKEN = 'ODQ0NzA2NjQzOTM2OTM1OTg3.YKWUXQ.Nv7tkuzZmg1ssug0flOwkWNWQfM'
+# TOKEN FOR BOT TESTER FOR KYOKO IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.eCwrLl7yBwzOVJMctYTyVwZc2JE
+TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.eCwrLl7yBwzOVJMctYTyVwZc2JE'
 
 # Create bot
 client = commands.Bot(command_prefix='k!')
@@ -39,10 +40,48 @@ rebellion_characters = [
     'Hitomi https://static.wikia.nocookie.net/all-worlds-alliance/images/f/f8/Hitomi-shizuki.png/revision/latest?cb=20180529035937',
     'Nagisa Momoe https://static.wikia.nocookie.net/magicalgirlmadokamagica/images/d/da/Nagisa_Momoe.png/revision/latest?cb=20150116234215']
 
-fact_list = [
-    'here are actually a fair few subjects Madoka dislikes, being English, Science, Chemistry, and she also notes a dislike of Physical Education, due to her low fortitude.',
-    'Madoka is in two clubs, both the gardening and crafts clubs.',
-    '', ]
+record_characters = [
+    'Iroha https://static.wikia.nocookie.net/madoka/images/2/2a/Iroha_Character.png/revision/latest?cb=20200528195609',
+    'Yachiyo https://static.wikia.nocookie.net/madoka/images/c/c9/Yachiyo_Profile.png/revision/latest?cb=20200130194756'
+    'Tsuruno https://images.puella-magi.net/thumb/3/39/Tsuruno_character.png/300px-Tsuruno_character.png?20170514003003',
+    'Sana https://images.puella-magi.net/thumb/e/e4/Sana_character.png/300px-Sana_character.png?20170514002521',
+    'Felicia https://static.wikia.nocookie.net/madoka/images/f/f3/Felicia_Profile.png/revision/latest?cb=20200130214559',
+    'Mifuyu https://images.puella-magi.net/thumb/d/d5/Mifuyu_Magireco_Profile.png/300px-Mifuyu_Magireco_Profile.png?20180609015225',
+    'Touka https://static.wikia.nocookie.net/madoka/images/6/69/Satomi_Touka.png/revision/latest?cb=20200810071722',
+    'Alina https://static.wikia.nocookie.net/madoka/images/7/71/Alinagray-0.png/revision/latest?cb=20200810065935',
+    'Nemu https://images.puella-magi.net/thumb/5/5e/Nemu_Temp_Profile.png/300px-Nemu_Temp_Profile.png?20190319212729',
+    'Ui https://images.puella-magi.net/thumb/6/68/Character_image-06-pc.png/150px-Character_image-06-pc.png?20200830134120',
+    'Rena https://static.wikia.nocookie.net/madoka/images/7/7c/Rena.png/revision/latest?cb=20201224204513',
+    'Momoko https://images.puella-magi.net/thumb/2/21/Momoko_Togame.png/300px-Momoko_Togame.png?20170723182841',
+    'Akino https://images.puella-magi.net/thumb/2/21/Akino_kaede.png/300px-Akino_kaede.png?20170815190110',
+    'Karin https://images.puella-magi.net/thumb/e/ed/Karin_profile_magia_record.png/300px-Karin_profile_magia_record.png?20171030100952',
+    'Kanagi https://images.puella-magi.net/thumb/8/89/Kanagi_magireco_profile.png/300px-Kanagi_magireco_profile.png?20180618122308',
+    'Mitama https://images.puella-magi.net/thumb/c/c8/Mitama_magireco_profile.png/300px-Mitama_magireco_profile.png?20180413084735',
+    'Tsukuyo https://static.wikia.nocookie.net/madoka/images/c/ce/Tsukuyo.png/revision/latest?cb=20200812041910',
+    'Tsukasa https://images.puella-magi.net/thumb/4/4d/Tsukasa_profile.png/300px-Tsukasa_profile.png?20171130120813',
+    'Kagome https://static.wikia.nocookie.net/character-stats-and-profiles/images/8/83/Kagome_school.png/revision/latest?cb=20200117221612',
+    'Yuna https://images.puella-magi.net/thumb/d/d4/Character_image-01-pc_%282%29.png/150px-Character_image-01-pc_%282%29.png?20200827053513',
+    'Kirari https://static.wikia.nocookie.net/magiarecord-en/images/8/87/Kirari_Hikaru_Kirari_Hikaru.png/revision/latest?cb=20191015142418',
+    'Ao https://images.puella-magi.net/thumb/5/57/Card_10234_l.png/300px-Card_10234_l.png?20200413161241,'
+    'Juri https://static.wikia.nocookie.net/character-stats-and-profiles/images/7/70/Oba_School.png/revision/latest/scale-to-width-down/350?cb=20191025192814',
+    'Shizuka https://images.puella-magi.net/thumb/c/c8/Character_image-01-pc.png/150px-Character_image-01-pc.png?20200827052609',
+    'Hiroe https://static.wikia.nocookie.net/magiarecord-en/images/7/73/Hiroe_Chiharu_Hiroe_Chiharu.png/revision/latest?cb=20190810085319',
+    'Sunao https://images.puella-magi.net/thumb/6/6c/Card_10274_l.png/300px-Card_10274_l.png?20191111161904',
+    'Himena https://preview.redd.it/10ydwy3vre251.jpg?auto=webp&s=383b83fbc697a41ce3a84c99ddb3f54c5179337e',
+    'Miyabi https://static.wikia.nocookie.net/magiarecord-en/images/c/cb/Miyabi_Shigure_Miyabi_Shigure.png/revision/latest/scale-to-width-down/400?cb=20191210112018',
+    'Hagumu https://images.puella-magi.net/thumb/f/f7/Card_10304_l.png/300px-Card_10304_l.png?20200225160028,'
+    'San https://images.puella-magi.net/thumb/4/4d/San_PM.png/300px-San_PM.png?20210322154351',
+    'Miyuri https://images.puella-magi.net/thumb/c/c3/Miyuri_PM.png/300px-Miyuri_PM.png?20210322154358',
+    'Rabi https://images.puella-magi.net/thumb/8/88/Unknown_9.png/150px-Unknown_9.png?20191110225936',
+    'Asashi https://images.puella-magi.net/thumb/2/27/Asashi_PM.png/150px-Asashi_PM.png?20200415032245',
+    'Alexandra https://images.puella-magi.net/thumb/9/9b/Card_10354_l.png/200px-Card_10354_l.png?20210414144230',
+    'Ulala https://images.puella-magi.net/thumb/b/ba/Urara_PM.png/150px-Urara_PM.png?20200529151225',
+    'Nayuta https://images.puella-magi.net/thumb/4/45/Nayuta_PM.png/150px-Nayuta_PM.png?20200630173031',
+    'Mikage https://images.puella-magi.net/thumb/0/0c/Card_10384_l.png/300px-Card_10384_l.png?20201116154251',
+    'Sudachi https://images.puella-magi.net/thumb/7/76/Card_10394_l.png/300px-Card_10394_l.png?20200706160947',
+    'Yozuru https://images.puella-magi.net/thumb/e/e1/Card_10404_l.png/300px-Card_10404_l.png?20200309194729',
+    'Medrios https://static.wikia.nocookie.net/magiarecord-en/images/7/7b/Livia_Medeiros_Livia_Medeiros.png/revision/latest/scale-to-width-down/400?cb=20200117093256',
+    'Lil Kubey https://images.puella-magi.net/thumb/c/c5/Mokyu.png/250px-Mokyu.png?20190807195659']
 
 
 # couple command
@@ -83,6 +122,9 @@ async def help(ctx):
     embed_help.add_field(name="k!rebellion ",
                          value="A command that randomly selects a character from Madoka Magica Rebellion",
                          inline=False)
+    embed_help.add_field(name="k!record ",
+                         value="A command that randomly selects a character from Madoka Magica Rebellion",
+                         inline=False)
     embed_help.set_image(
         url='https://cdn.discordapp.com/attachments/783124120492572684/845654137286033448/2922757-7815334573-POTK-.png')
     await ctx.send(embed=embed_help)
@@ -102,7 +144,6 @@ async def survival(ctx):
     await ctx.send(embed=embed_sur)
 
 
-
 # Magica command
 @client.command()
 async def magica(message):
@@ -115,6 +156,14 @@ async def magica(message):
 async def rebellion(message):
     await message.channel.send(
         "Here's a random one... " + random.choice(rebellion_characters) + " is a good pick! (I think..)")
+
+
+# Record Command
+
+@client.command()
+async def record(message):
+    await message.channel.send(
+        "Here's a random one... " + random.choice(record_characters) + " is a good pick! (I think..)")
 
 
 # Waiting
@@ -173,6 +222,14 @@ async def on_message(message):
         await message.add_reaction('\U0001F620')
 
     await client.process_commands(message)
+
+
+@client.event
+async def on_ready():
+    print('Logged in as')
+    print(client.user.name)
+    print(client.user.id)
+    print('------')
 
 
 client.run(TOKEN)
