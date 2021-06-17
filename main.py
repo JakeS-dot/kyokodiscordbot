@@ -8,12 +8,12 @@ import random
 # Credentials
 # TOKEN FOR FOR KYOKO (MAIN) IS ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE
 # TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0
-TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
+TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0'
 
 # Create bot
 client = commands.Bot(command_prefix='k!',
                       activity=discord.Activity(type=discord.ActivityType.watching,
-                                                name="TOO MANY NAGITO EDITS | v1.0.4 | Made by xx-jake-xx#5302  "))
+                                                name="TOO MANY NAGITO EDITS | v0.4.2 | Made by xx-jake-xx#5302  "))
 client.remove_command('help')
 
 # lists for commands
@@ -153,8 +153,8 @@ record_side = [
 sidestory_list = ['Kazumi https://images.puella-magi.net/4/4b/PMMMO-KazumiFull.png?20130712122133',
                   'Umika https://images.puella-magi.net/thumb/8/82/Umika_magireco_profile.png/300px-Umika_magireco_profile.png?20171120192046',
                   'Kaoru https://images.puella-magi.net/thumb/3/3d/Kaoru_maki_magireco_profile.png/300px-Kaoru_maki_magireco_profile.png?20171120192506',
-                  'Suzune https://static.wikia.nocookie.net/youkoso-jitsuryoku-shijou-shugi-no-kyoushitsu-e/images/3/3f/Suzune_Horikita_LN_visual.png/revision/latest?cb=20170901054140',
-                  'Arisa https://images.puella-magi.net/thumb/f/f8/Arisa-pinkeyes.jpg/300px-Arisa-pinkeyes.jpg?20151101084559',
+                  'Suzune https://images.puella-magi.net/thumb/9/96/Suzune_amano_magireco_profile.png/300px-Suzune_amano_magireco_profile.png?20180501085527',
+                  'Arisa https://images.puella-magi.net/thumb/d/dd/Arisa_magireco_profile.png/300px-Arisa_magireco_profile.png?20180501085629',
                   'Matsuri https://images.puella-magi.net/thumb/9/9e/Card_40324_l.png/300px-Card_40324_l.png?20191031160303',
                   'Tsubaki https://images.puella-magi.net/thumb/5/5e/Card_40364_l.png/300px-Card_40364_l.png?20210125210656',
                   'Chisato https://images.puella-magi.net/thumb/4/43/Chisato_Shion_Magireco_Profile.png/300px-Chisato_Shion_Magireco_Profile.png?20180501090404',
@@ -234,21 +234,9 @@ async def sidestory(message):
 
 @client.command()
 async def changelog(ctx):
-    changelog_embed = discord.Embed(title="Change log for v1.0.4",
-                                    description="Here is the change log for 1.0.4! Enjoy!", color=0xa80000)
-    changelog_embed.add_field(name="~Added k!sidestory",
-                              value="A command that randomly selects a side story character from Madoka Magica Manga and Other Magica Shows!",
-                              inline=False)
-    changelog_embed.add_field(name="~Added k!recordside",
-                              value="A command that randomly selects a side story character from Madoka Magica Record",
-                              inline=False)
-    changelog_embed.add_field(name="~Updated Help Menu", value="Now with a new (and bad-ish) help image and TWO PAGES!",
-                              inline=False)
-    changelog_embed.add_field(name="~Added the keyword dance!", value="Go try it!", inline=False)
-    changelog_embed.add_field(name="~Ton of bug fixes", value="(Major ones like status being broken)", inline=False)
-    changelog_embed.add_field(name="~Polished alot of things", value="(Technical code crap, compacting code)",
-                              inline=False)
-    changelog_embed.set_footer(text="Change log for v1.0.4, released on 6/14/21")
+    changelog_embed = discord.Embed(title="Change log for v0.4.2", description="Here is the change log for 0.4.2! Enjoy!", color=0xa80000)
+    changelog_embed.add_field(name="~New naming system!", value="Now we are on 0.4.2, so I can release bug fixes without having to wait till .5 or .6", inline=False)
+    changelog_embed.add_field(name="~Bug fixes", value="Fixed pictures in sidestory and others, **DM ME ANY BUGS YOU FIND :heart:**", inline=False)
     await ctx.send(embed=changelog_embed)
 
 
