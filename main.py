@@ -1,4 +1,6 @@
 # Imports
+import json
+
 import discord
 from discord.ext import commands
 import random
@@ -8,7 +10,7 @@ import random
 # Credentials
 # TOKEN FOR FOR KYOKO (MAIN) IS ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE
 # TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0
-TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
+TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0'
 
 # Create bot
 client = commands.Bot(command_prefix='k!',
@@ -234,25 +236,39 @@ async def sidestory(message):
 
 @client.command()
 async def changelog(ctx):
-    changelog_embed = discord.Embed(title="Change log for v0.4.2", description="Here is the change log for 0.4.2! Enjoy!", color=0xa80000)
-    changelog_embed.add_field(name="~New naming system!", value="Now we are on 0.4.2, so I can release bug fixes without having to wait till .5 or .6", inline=False)
-    changelog_embed.add_field(name="~Bug fixes", value="Fixed pictures in sidestory and others, **DM ME ANY BUGS YOU FIND :heart:**", inline=False)
+    changelog_embed = discord.Embed(title="Change log for v0.4.2",
+                                    description="Here is the change log for 0.4.2! Enjoy!", color=0xa80000)
+    changelog_embed.add_field(name="~New naming system!",
+                              value="Now we are on 0.4.2, so I can release bug fixes without having to wait till .5 or .6",
+                              inline=False)
+    changelog_embed.add_field(name="~Bug fixes",
+                              value="Fixed pictures in sidestory and others, **DM ME ANY BUGS YOU FIND :heart:**",
+                              inline=False)
     await ctx.send(embed=changelog_embed)
 
 
 # HEEP COMMAND!
 @client.command()
 async def help(ctx):
-    page1 = discord.Embed(title="Page 1/2 | Commands", description="Well it seems like you need help. Noob. Anyways here's the commands you wanted.", color=0xa80000)
-    page1.set_thumbnail(url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+    page1 = discord.Embed(title="Page 1/2 | Commands",
+                          description="Well it seems like you need help. Noob. Anyways here's the commands you wanted.",
+                          color=0xa80000)
+    page1.set_thumbnail(
+        url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
     page1.add_field(name="k!help", value="Shows this menu, how impressive.", inline=False)
     page1.add_field(name="k!couple", value="Generates A Couple!", inline=True)
     page1.add_field(name="k!ship", value="Generates a ship from a list of Madoka Magica Characters!!", inline=True)
-    page1.add_field(name="k!survival", value="A command that randomly generates chances of surviving madoka magica", inline=True)
-    page1.add_field(name="k!magica", value="A command that randomly selects a character from the anime Madoka Magica", inline=True)
-    page1.add_field(name="k!rebellion ", value="A command that randomly selects a character from Madoka Magica Rebellion", inline=True)
-    page1.add_field(name="k!record ", value="A command that randomly selects a character from Madoka Magica Record", inline=True)
-    page1.add_field(name="k!recordside ", value="A command that randomly selects a side story character from Madoka Magica Record", inline=True)
+    page1.add_field(name="k!survival", value="A command that randomly generates chances of surviving madoka magica",
+                    inline=True)
+    page1.add_field(name="k!magica", value="A command that randomly selects a character from the anime Madoka Magica",
+                    inline=True)
+    page1.add_field(name="k!rebellion ",
+                    value="A command that randomly selects a character from Madoka Magica Rebellion", inline=True)
+    page1.add_field(name="k!record ", value="A command that randomly selects a character from Madoka Magica Record",
+                    inline=True)
+    page1.add_field(name="k!recordside ",
+                    value="A command that randomly selects a side story character from Madoka Magica Record",
+                    inline=True)
     page1.add_field(name="k!changelog ", value="Its a change log for the latest update!", inline=True)
     page1.set_image(url='https://i.imgur.com/Sz4Ogro.png')
 
@@ -355,6 +371,166 @@ async def on_message(message):
     await client.process_commands(message)
 
 
+#########################
+# OOOOOOOOOOO DAMM ITS ECONOMY TIMEE
+beg_list = ['**Kyosuke**', '**Madoka**', '**Jake XD**', '**Homura**', '**Mami**', '**Sayaka**', '**Hitomi**',
+            '**Kyoko**', '**Garfield**']
+
+
+##########
+# Daily Command
+@client.command(pass_context=True)
+@commands.cooldown(1.0, 43200.0, commands.BucketType.guild)
+async def daily(ctx):
+    user = ctx.author
+    users = await get_bank_data()
+    daily_earnings = random.randrange(113, 358)
+    await ctx.send(
+        "Are budget couldn't afford to but custom story embeds, so u got " + str(daily_earnings) + " koins ig")
+
+    users[str(user.id)]["wallet"] += daily_earnings
+    with open("bank.json", 'w') as f:
+        json.dump(users, f)
+
+
+# Work Command
+@client.command(pass_context=True)
+@commands.cooldown(1.0, 1800.0, commands.BucketType.guild)
+async def work(ctx):
+    user = ctx.author
+    users = await get_bank_data()
+    work_earnings = random.randrange(62, 276)
+    await ctx.send(
+        "Are budget couldn't afford to but custom story embeds, so u got " + str(work_earnings) + " koins ig")
+
+    users[str(user.id)]["wallet"] += work_earnings
+    with open("bank.json", 'w') as f:
+        json.dump(users, f)
+
+
+# Wallet command
+@client.command(aliases=['bal'])
+async def wallet(ctx):
+    await open_account(ctx.author)
+    user = ctx.author
+
+    users = await get_bank_data()
+
+    wallet_amt = users[str(user.id)]["wallet"]
+
+    embed = discord.Embed(title=str(ctx.author.name) + "'s Wallet!!", color=0xcc0000)
+    embed.set_thumbnail(url=ctx.author.avatar_url)
+    embed.add_field(name="Soul Gem Status", value="ok i haven't gotten to death crap so u know in progress",
+                    inline=False)
+    embed.add_field(name="Koins", value=wallet_amt, inline=False)
+    await ctx.send(embed=embed)
+
+
+# Beg command
+@client.command()
+async def beg(ctx):
+    await open_account(ctx.author)
+    user = ctx.author
+
+    users = await get_bank_data()
+
+    earnings = random.randrange(101)
+
+    await ctx.send(random.choice(beg_list) + " gave you " + str(earnings) + " Koins!")
+
+    users[str(user.id)]["wallet"] += earnings
+
+    with open("bank.json", 'w') as f:
+        json.dump(users, f)
+
+
+# Slotss
+@client.command(pass_context=True)
+@commands.cooldown(2.0, 30.0, commands.BucketType.guild)
+async def slots(ctx, amount=None):
+    if amount is None:
+        await ctx.send("Please enter an amount")
+        return
+
+    bal = await update_bank(ctx.author)
+
+    amount = int(amount)
+    if amount > bal[0]:
+        await ctx.send("You don't have that much money!")
+        return
+    if amount < 0:
+        await ctx.send("Amount must be positive")
+        return
+
+    slots = ['heart', 'orange_heart', 'yellow_heart', 'green_heart', 'blue_heart', 'purple_heart']
+    slot1 = slots[random.randint(0, 5)]
+    slot2 = slots[random.randint(0, 5)]
+    slot3 = slots[random.randint(0, 5)]
+
+    slotOutput = '| :{}: | :{}: | :{}: |\n'.format(slot1, slot2, slot3)
+
+    ok = discord.Embed(title="Slots Machine", color=discord.Color(0xFFEC))
+    ok.add_field(name="{}\nWon".format(slotOutput), value=f'You won {2 * amount} seeds')
+
+    won = discord.Embed(title="Slots Machine", color=discord.Color(0xFFEC))
+    won.add_field(name="{}\nWon".format(slotOutput), value=f'You won {3 * amount} seeds')
+
+    lost = discord.Embed(title="Slots Machine", color=discord.Color(0xFFEC))
+    lost.add_field(name="{}\nLost".format(slotOutput), value=f'You lost {1 * amount} seeds')
+
+    if slot1 == slot2 == slot3:
+        await update_bank(ctx.author, 3 * amount)
+        await ctx.send(embed=won)
+        return
+
+    if slot1 == slot2:
+        await update_bank(ctx.author, 2 * amount)
+        await ctx.send(embed=ok)
+        return
+
+    else:
+        await update_bank(ctx.author, -1 * amount)
+        await ctx.send(embed=lost)
+        return
+
+
+# Economy technical crap 
+async def open_account(user):
+    users = await get_bank_data()
+
+    if str(user.id) in users:
+        return False
+    else:
+        users[str(user.id)] = {}
+        users[str(user.id)]["wallet"] = 0
+        users[str(user.id)]["bank"] = 0
+
+    with open('bank.json', 'w') as f:
+        json.dump(users, f)
+
+    return True
+
+
+async def get_bank_data():
+    with open('bank.json', 'r') as f:
+        users = json.load(f)
+
+    return users
+
+
+async def update_bank(user, change=0, mode='wallet'):
+    users = await get_bank_data()
+
+    users[str(user.id)][mode] += change
+
+    with open('bank.json', 'w') as f:
+        json.dump(users, f)
+    bal = users[str(user.id)]['wallet'], users[str(user.id)]['bank']
+    return bal
+
+
+#################
+# BYE ECONOMY
 @client.event
 async def on_ready():
     print('Logged in as')
