@@ -1,16 +1,21 @@
 # Imports
 import json
+import random
 
 import discord
 from discord.ext import commands
-import random
 
+# Todo: Add new page in help for economy
+
+# Todo: Bug fixes
+#       specifically change the thing from koins to koins in slots
+#       and any other thing u find
 # JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT THE KYOKO (TEST) TOKEN, BUT KYOKO (MAIN) TOKEN
 
 # Credentials
 # TOKEN FOR FOR KYOKO (MAIN) IS ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE
 # TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0
-TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0'
+TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
 
 # Create bot
 client = commands.Bot(command_prefix='k!',
@@ -236,58 +241,59 @@ async def sidestory(message):
 
 @client.command()
 async def changelog(ctx):
-    changelog_embed = discord.Embed(title="Change log for v0.4.2",
-                                    description="Here is the change log for 0.4.2! Enjoy!", color=0xa80000)
-    changelog_embed.add_field(name="~New naming system!",
-                              value="Now we are on 0.4.2, so I can release bug fixes without having to wait till .5 or .6",
-                              inline=False)
-    changelog_embed.add_field(name="~Bug fixes",
-                              value="Fixed pictures in sidestory and others, **DM ME ANY BUGS YOU FIND :heart:**",
-                              inline=False)
+    changelog_embed = discord.Embed(title="Change Log For v0.5.2", color=0xa80000)
+    changelog_embed.add_field(name="A Economey? ", value="undefined", inline=False)
+    changelog_embed.add_field(name="k!daily", value="undefined", inline=False)
+    changelog_embed.add_field(name="k!slots", value="undefined", inline=False)
+    changelog_embed.add_field(name="k!beg", value="undefined", inline=False)
+    changelog_embed.add_field(name="k!work", value="undefined", inline=False)
+    changelog_embed.add_field(name="Major Revamps and bug fixes", value="undefined", inline=False)
     await ctx.send(embed=changelog_embed)
 
 
 # HEEP COMMAND!
 @client.command()
 async def help(ctx):
-    page1 = discord.Embed(title="Page 1/2 | Commands",
-                          description="Well it seems like you need help. Noob. Anyways here's the commands you wanted.",
-                          color=0xa80000)
-    page1.set_thumbnail(
-        url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
-    page1.add_field(name="k!help", value="Shows this menu, how impressive.", inline=False)
-    page1.add_field(name="k!couple", value="Generates A Couple!", inline=True)
-    page1.add_field(name="k!ship", value="Generates a ship from a list of Madoka Magica Characters!!", inline=True)
-    page1.add_field(name="k!survival", value="A command that randomly generates chances of surviving madoka magica",
-                    inline=True)
-    page1.add_field(name="k!magica", value="A command that randomly selects a character from the anime Madoka Magica",
-                    inline=True)
-    page1.add_field(name="k!rebellion ",
-                    value="A command that randomly selects a character from Madoka Magica Rebellion", inline=True)
-    page1.add_field(name="k!record ", value="A command that randomly selects a character from Madoka Magica Record",
-                    inline=True)
-    page1.add_field(name="k!recordside ",
-                    value="A command that randomly selects a side story character from Madoka Magica Record",
-                    inline=True)
-    page1.add_field(name="k!changelog ", value="Its a change log for the latest update!", inline=True)
+    page1 = discord.Embed(title="Help!",description="Hello! I am Kyoko Sakura, the Ultimate Magical Girl! I hope to server you well in your server, to entertain, to laugh at, to crush your poor little heart. I can do over 15 commands! The creator (me) has worked very, very hard on this. I hope I did my best, and I hope I can give you a bot of a lifetime... ",color=0xa80000)
+    page1.add_field(name="Bot Invite", value="https://top.gg/bot/853396288162103307", inline=False)
+    page1.add_field(name="Creator", value="xx-jake-xx#5302 (Only freind/dm me for a bug report, ty)", inline=True)
     page1.set_image(url='https://i.imgur.com/Sz4Ogro.png')
 
-    page2 = discord.Embed(title="Page 2/2 | Keywords", color=0xa80000, description="Keywords of the Kyoko bot!")
-    page2.add_field(name="Madoka/Magical Girl/Meguca", value="It is suffering..", inline=True)
-    page2.add_field(name="Dance", value="  I'll send a funny gif!", inline=True)
-    page2.add_field(name="Sayaka", value="Ill react to any kind of message with the keyword of sayaka", inline=True)
-    page2.add_field(name="Kyubey", value="Hehe, f/// you kyubey", inline=True)
-    page2.set_thumbnail(
-        url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+    page2 = discord.Embed(title="Page 2/4 | Commands", color=0xa80000, description="Keywords of the Kyoko bot!")
+    page2.set_thumbnail(url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+    page2.add_field(name="k!help", value="Shows this menu, how impressive.", inline=False)
+    page2.add_field(name="k!couple", value="Generates A Couple!", inline=True)
+    page2.add_field(name="k!ship", value="Generates a ship from a list of Madoka Magica Characters!!", inline=True)
+    page2.add_field(name="k!survival", value="A command that randomly generates chances of surviving madoka magica",inline=True)
+    page2.add_field(name="k!magica", value="A command that randomly selects a character from the anime Madoka Magica",inline=True)
+    page2.add_field(name="k!rebellion ",value="A command that randomly selects a character from Madoka Magica Rebellion", inline=True)
+    page2.add_field(name="k!record ", value="A command that randomly selects a character from Madoka Magica Record",inline=True)
+    page2.add_field(name="k!recordside ",value="A command that randomly selects a side story character from Madoka Magica Record",inline=True)
+    page2.add_field(name="k!changelog ", value="Its a change log for the latest update!", inline=True)
 
-    pages = [page1, page2]
+
+    page3 = discord.Embed(title="Page 3/4 | Keywords", color=0xa80000, description="Keywords of the Kyoko bot!")
+    page3.add_field(name="Madoka/Magical Girl/Meguca", value="It is suffering..", inline=True)
+    page3.add_field(name="Dance", value="  I'll send a funny gif!", inline=True)
+    page3.add_field(name="Sayaka", value="Ill react to any kind of message with the keyword of sayaka", inline=True)
+    page3.add_field(name="Kyubey", value="Hehe, f/// you kyubey", inline=True)
+    page3.set_thumbnail(url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+
+    page4 = discord.Embed(title="Page 4/4 | Economy", color=0xa80000,description="Economy Commands of the Kyoko Discord™ bot!")
+    page4.add_field(name="Wallet", value="Shows your e-wallet! ", inline=True)
+    page4.add_field(name="Beg", value="Beg for some koins!", inline=True)
+    page4.add_field(name="Work", value="Work for koins!", inline=True)
+    page4.add_field(name="Daily", value="Use this command once per day to hang out with some magical girls!",inline=True)
+    page4.add_field(name="Slots", value="Bet your money in the slot machine! Earn up ", inline=True)
+    page4.set_thumbnail(url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+
+    pages = [page1, page2, page3, page4]
 
     message = await ctx.send(embed=page1)
-    # await message.add_reaction('⏮')
+    await message.add_reaction('⏮')
     await message.add_reaction('◀')
     await message.add_reaction('▶')
-
-    # await message.add_reaction('⏭')
+    await message.add_reaction('⏭')
 
     def check(reaction, user_help):
         return user_help == ctx.author
@@ -296,9 +302,9 @@ async def help(ctx):
     reaction = None
 
     while True:
-        # if str(reaction) == '⏮':
-        #  i = 0
-        #    await message.edit(embed=pages[i])
+        if str(reaction) == '⏮':
+            i = 0
+            await message.edit(embed=pages[i])
         if str(reaction) == '◀':
             if i > 0:
                 i -= 1
@@ -307,9 +313,9 @@ async def help(ctx):
             if i < 2:
                 i += 1
                 await message.edit(embed=pages[i])
-        # elif str(reaction) == '⏭':
-        #    i = 2
-        #    await message.edit(embed=pages[i])
+        elif str(reaction) == '⏭':
+            i = 2
+            await message.edit(embed=pages[i])
 
         try:
             reaction, user = await client.wait_for('reaction_add', timeout=30.0, check=check)
@@ -446,7 +452,7 @@ async def beg(ctx):
 
 # Slotss
 @client.command(pass_context=True)
-@commands.cooldown(2.0, 30.0, commands.BucketType.guild)
+@commands.cooldown(1.0, 30.0, commands.BucketType.user)
 async def slots(ctx, amount=None):
     if amount is None:
         await ctx.send("Please enter an amount")
@@ -470,13 +476,13 @@ async def slots(ctx, amount=None):
     slotOutput = '| :{}: | :{}: | :{}: |\n'.format(slot1, slot2, slot3)
 
     ok = discord.Embed(title="Slots Machine", color=discord.Color(0xFFEC))
-    ok.add_field(name="{}\nWon".format(slotOutput), value=f'You won {2 * amount} seeds')
+    ok.add_field(name="{}\nWon".format(slotOutput), value=f'You won {2 * amount} koins')
 
     won = discord.Embed(title="Slots Machine", color=discord.Color(0xFFEC))
-    won.add_field(name="{}\nWon".format(slotOutput), value=f'You won {3 * amount} seeds')
+    won.add_field(name="{}\nWon".format(slotOutput), value=f'You won {3 * amount} koins')
 
     lost = discord.Embed(title="Slots Machine", color=discord.Color(0xFFEC))
-    lost.add_field(name="{}\nLost".format(slotOutput), value=f'You lost {1 * amount} seeds')
+    lost.add_field(name="{}\nLost".format(slotOutput), value=f'You lost {1 * amount} koins')
 
     if slot1 == slot2 == slot3:
         await update_bank(ctx.author, 3 * amount)
@@ -494,7 +500,7 @@ async def slots(ctx, amount=None):
         return
 
 
-# Economy technical crap 
+# Economy technical crap
 async def open_account(user):
     users = await get_bank_data()
 
