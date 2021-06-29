@@ -5,26 +5,22 @@ import random
 import discord
 from discord.ext import commands
 
-# Todo: Add new page in help for economy
-
-# Todo: Bug fixes
-#       specifically change the thing from koins to koins in slots
-#       and any other thing u find
+# Todo: bug hunting time.
+#
 # JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT THE KYOKO (TEST) TOKEN, BUT KYOKO (MAIN) TOKEN
 
 # Credentials
 # TOKEN FOR FOR KYOKO (MAIN) IS ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE
 # TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0
-TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
+TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0'
 
 # Create bot
 client = commands.Bot(command_prefix='k!',
                       activity=discord.Activity(type=discord.ActivityType.watching,
-                                                name="TOO MANY NAGITO EDITS | v0.5.3 | Made by xx-jake-xx#5302  "))
+                                                name="TOO MANY NAGITO EDITS | v0.5.4 | Made by xx-jake-xx#5302  "))
 client.remove_command('help')
 
 # lists for commands
-couple_list = ['Jake', 'Chair Man', 'Eleanor', 'Sofy', 'Vae', 'Pebble', 'Tenko', 'Nagito', 'MEE6', 'Carl-Bot', 'Iman']
 ship_list = ['Madoka Kaname', 'Homura Akemi', 'Sayaka Miki', 'Mami Tomoe', 'Kyo(u)ko Sakura', 'Hitomi Shizuki',
              'Kyosuke Kamijio']
 ship_dis = ['It would be so intense!', 'A nail biter!', 'Its the best pick I got!']
@@ -171,23 +167,15 @@ sidestory_list = ['Kazumi https://images.puella-magi.net/4/4b/PMMMO-KazumiFull.p
                   'Yuuri https://i.imgur.com/g5Y1Xpg.png']
 
 
-# couple command
-@client.command()
-async def couple(ctx):
-    embed_couple = discord.Embed(title=('In my opinion, ' + (random.choice(couple_list)) + ' and ' + (
-        random.choice(couple_list)) + ' would be a great pair!'), color=0x8b0000)
-    embed_couple.set_footer(text="What a nice couple 💘💖💗💓🧡💝💙❤💕💔♥♥")
-    await ctx.send(embed=embed_couple)
-
-
 # ship command
 @client.command()
 async def ship(ctx):
     ship_cmd = discord.Embed(title=('In my opinion, ' + (random.choice(ship_list)) + ' and ' + (
-        random.choice(ship_list)) + ' would be a great ship!'), color=0x8b0000)
+        random.choice(ship_list)) + ' would be a great ship!'), color=0xa00000)
     ship_cmd.set_footer(text=(random.choice(ship_dis)))
     ship_cmd.set_thumbnail(
         url="https://cdn.discordapp.com/attachments/801105512933752882/845050099678576640/unknown.png")
+    ship_cmd.set_image(url="https://i.pinimg.com/originals/45/09/c7/4509c76ea660d121c11c303a31908c23.png")
     await ctx.send(embed=ship_cmd)
 
 
@@ -200,7 +188,7 @@ async def survival(ctx):
                                           str(random.randint(1,
                                                              99)) + "% chance of surviving Madoka Magica. You would die " +
                                           str(random.choice(place_sur)) + " and you died because you " +
-                                          str(random.choice(death_sur)), color=0xb30000)
+                                          str(random.choice(death_sur)), color=0xa00000)
     embed_sur.set_image(url="https://www.pngkey.com/png/full/179-1790644_information-kyoko-sakura-power.png")
     await ctx.send(embed=embed_sur)
 
@@ -241,36 +229,47 @@ async def sidestory(message):
 
 @client.command()
 async def changelog(ctx):
-    changelog_embed = discord.Embed(title="Change Log For v0.5.1- v0.5.3", color=0xa80000)
-    changelog_embed.add_field(name="A Economey? ", value=" ", inline=False)
-    changelog_embed.add_field(name="k!daily", value=" ", inline=False)
-    changelog_embed.add_field(name="k!slots", value=" ", inline=False)
-    changelog_embed.add_field(name="k!beg", value=" ", inline=False)
-    changelog_embed.add_field(name="k!fight", value=" ", inline=False)
-    changelog_embed.add_field(name="Major Revamps and bug fixes", value=" ", inline=False)
+    changelog_embed = discord.Embed(title="Change Log For v0.5.1- v0.5.4", color=0xa80000)
+    changelog_embed.add_field(name="A Economy? ", value=":moneybag: :moneybag:", inline=False)
+    changelog_embed.add_field(name="k!daily", value=":dollar:", inline=False)
+    changelog_embed.add_field(name="k!slots", value=":slot_machine:", inline=False)
+    changelog_embed.add_field(name="k!beg", value=":money_with_wings:", inline=False)
+    changelog_embed.add_field(name="k!fight", value=":crossed_swords: :crossed_swords:", inline=False)
+    changelog_embed.add_field(name="Major Revamps and bug fixes", value=":bug: :dizzy_face: ", inline=False)
+    changelog_embed.add_field(name="Cooldowns", value=":clock:", inline=False)
+    changelog_embed.add_field(name="plz report any bugs to xx-jake-xx#5302... ty", value=":heart:", inline=False)
     await ctx.send(embed=changelog_embed)
 
 
 # HEEP COMMAND!
 @client.command()
+@commands.cooldown(1.0, 10.0, commands.BucketType.user)
 async def help(ctx):
     page1 = discord.Embed(title="Help!",
-                          description="Hello! I am Kyoko Sakura, you know, that magical girl from Madoka Magica.. I hope to serve you well in your server, to entertain, to laugh at, to crush your poor little heart. I can do over 15 commands! The creator (me) has worked very, very hard on this. I hope I did my best, and I hope I can give you a bot of a lifetime... ",
+                          description="Hello! I am Kyoko Sakura, you know, that magical girl from Madoka Magica.. I hope to serve you well in your server, to entertain, to laugh at, to crush your poor little heart. I can do over 15 commands and keywords! The creator (me) has worked very, very hard on this. I hope I did my best, and I hope I can give you a bot of a lifetime... ",
                           color=0xa80000)
     page1.add_field(name="Bot Invite", value="https://top.gg/bot/853396288162103307", inline=False)
-    page1.add_field(name="Creator", value="xx-jake-xx#5302 (Only freind/dm me for a bug report, ty)", inline=True)
+    page1.add_field(name="Creator", value="xx-jake-xx#5302 (Only friend/dm me for a bug report, ty)", inline=True)
     page1.set_image(url='https://i.imgur.com/Sz4Ogro.png')
 
-    page2 = discord.Embed(title="Page 2/4 | Commands", color=0xa80000, description="Keywords of the Kyoko bot!")
-    page2.set_thumbnail(url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+    page2 = discord.Embed(title="Page 2/4 | Commands", color=0xa80000, description="Anime/Other Commands of the Kyoko bot!")
+    page2.set_thumbnail(
+        url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
     page2.add_field(name="k!help", value="Shows this menu, how impressive.", inline=False)
-    page2.add_field(name="k!couple", value="Generates A Couple!", inline=True)
+    page2.add_field(name="k!sidestory",
+                    value="A command that randomly generates a side story character from a custom list", inline=True)
     page2.add_field(name="k!ship", value="Generates a ship from a list of Madoka Magica Characters!!", inline=True)
-    page2.add_field(name="k!survival", value="A command that randomly generates chances of surviving madoka magica", inline=True)
-    page2.add_field(name="k!magica", value="A command that randomly selects a character from the anime Madoka Magica", inline=True)
-    page2.add_field(name="k!rebellion ", value="A command that randomly selects a character from Madoka Magica Rebellion", inline=True)
-    page2.add_field(name="k!record ", value="A command that randomly selects a character from Madoka Magica Record", inline=True)
-    page2.add_field(name="k!recordside ", value="A command that randomly selects a side story character from Madoka Magica Record", inline=True)
+    page2.add_field(name="k!survival", value="A command that randomly generates chances of surviving madoka magica",
+                    inline=True)
+    page2.add_field(name="k!magica", value="A command that randomly selects a character from the anime Madoka Magica",
+                    inline=True)
+    page2.add_field(name="k!rebellion ",
+                    value="A command that randomly selects a character from Madoka Magica Rebellion", inline=True)
+    page2.add_field(name="k!record ", value="A command that randomly selects a character from Madoka Magica Record",
+                    inline=True)
+    page2.add_field(name="k!recordside ",
+                    value="A command that randomly selects a side story character from Madoka Magica Record",
+                    inline=True)
     page2.add_field(name="k!changelog ", value="Its a change log for the latest update!", inline=True)
 
     page3 = discord.Embed(title="Page 3/4 | Keywords", color=0xa80000, description="Keywords of the Kyoko bot!")
@@ -278,15 +277,18 @@ async def help(ctx):
     page3.add_field(name="Dance", value="  I'll send a funny gif!", inline=True)
     page3.add_field(name="Sayaka", value="Ill react to any kind of message with the keyword of sayaka", inline=True)
     page3.add_field(name="Kyubey", value="Hehe, f/// you kyubey", inline=True)
-    page3.set_thumbnail(url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+    page3.set_thumbnail(
+        url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
 
-    page4 = discord.Embed(title="Page 4/4 | Economy", color=0xa80000, description="Economy Commands of the Kyoko Discord™ bot!")
-    page4.add_field(name="Wallet", value="Shows your e-wallet! ", inline=True)
-    page4.add_field(name="Beg", value="Beg for some koins!", inline=True)
-    page4.add_field(name="Fight", value="Fight with a magical girl for koins!"inline=True)
-    page4.add_field(name="Daily", value="Use this command once per day to hang out with some magical girls!", inline=True)
-    page4.add_field(name="Slots", value="Bet your money in the slot machine! Earn up ", inline=True)
-    page4.set_thumbnail(url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+    page4 = discord.Embed(title="Page 4/4 | Economy", color=0xa80000,
+                          description="Economy Commands of the Kyoko Discord™ bot!")
+    page4.add_field(name="k!wallet", value="Shows your e-wallet! ", inline=True)
+    page4.add_field(name="k!beg", value="Beg for some koins!", inline=True)
+    page4.add_field(name="k!fight", value="Fight with a magical girl for koins!", inline=True)
+    page4.add_field(name="k!daily", value="Use this command once per day to hang out with some magical girls!",inline=True)
+    page4.add_field(name="k!slots", value="Bet your money in the slot machine! Earn up ", inline=True)
+    page4.set_thumbnail(
+        url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
 
     pages = [page1, page2, page3, page4]
 
@@ -311,11 +313,13 @@ async def help(ctx):
                 i -= 1
                 await message.edit(embed=pages[i])
         elif str(reaction) == '▶':
-            if i < 2:
+            # Make V To add 1 to that number when adding a new emebed page
+            if i < 3:
                 i += 1
                 await message.edit(embed=pages[i])
         elif str(reaction) == '⏭':
-            i = 2
+            #   V same here
+            i = 3
             await message.edit(embed=pages[i])
 
         try:
@@ -360,9 +364,11 @@ async def on_message(message):
     if "Meguca" in message.content:
         await message.channel.send("✨being Meguca is suffering✨")
     if "dance" in message.content:
-        await message.channel.send('https://media1.tenor.com/images/2d32f3383f87f8d0822e2e4b327e2537/tenor.gif?itemid=19119793')
+        await message.channel.send(
+            'https://media1.tenor.com/images/2d32f3383f87f8d0822e2e4b327e2537/tenor.gif?itemid=19119793')
     if "Dance" in message.content:
-        await message.channel.send('https://media1.tenor.com/images/2d32f3383f87f8d0822e2e4b327e2537/tenor.gif?itemid=19119793')
+        await message.channel.send(
+            'https://media1.tenor.com/images/2d32f3383f87f8d0822e2e4b327e2537/tenor.gif?itemid=19119793')
 
     if "sayaka" in message.content:
         await message.add_reaction('\U00002764')
@@ -405,7 +411,8 @@ async def fight(ctx):
     user = ctx.author
     users = await get_bank_data()
     fight_earnings = random.randrange(62, 276)
-    await ctx.send("Are budget couldn't afford to but custom story embeds, so u got " + str(fight_earnings) + " koins ig")
+    await ctx.send(
+        "Are budget couldn't afford to but custom story embeds, so u got " + str(fight_earnings) + " koins ig")
 
     users[str(user.id)]["wallet"] += fight_earnings
     with open("bank.json", 'w') as f:
@@ -422,7 +429,7 @@ async def wallet(ctx):
 
     wallet_amt = users[str(user.id)]["wallet"]
 
-    embed = discord.Embed(title=str(ctx.author.name) + "'s Wallet!!", color=0xcc0000)
+    embed = discord.Embed(title=str(ctx.author.name) + "'s Wallet!!", color=0xa00000)
     embed.set_thumbnail(url=ctx.author.avatar_url)
     embed.add_field(name="Soul Gem Status", value="ok i haven't gotten to death crap so u know in progress",
                     inline=False)
@@ -467,21 +474,22 @@ async def slots(ctx, amount=None):
         await ctx.send("Amount must be positive")
         return
 
-    slots = ['<:emoji1:859178701094912030>', '<:emoji2:859178728852160512>', '<:emoji3min:859179625762652201>',
-             '<:emoji4:859178815745949696>', '<:emohi5min:859179597262618624>', '<:emoji6:859178897181376552>', '<:emoji7:859178915113336832>']
+    slots = ['<:emoji8:859178701094912030>>', '<:emoji2:859178728852160512>', '<:emoji3min:859179625762652201>',
+             '<:emoji4:859178815745949696>', '<:emohi5min:859179597262618624>', '<:emoji6:859178897181376552>',
+             '<:emoji7:859178915113336832>']
     slot1 = slots[random.randint(0, 5)]
     slot2 = slots[random.randint(0, 5)]
     slot3 = slots[random.randint(0, 5)]
 
     slotOutput = '| {} | {} | {} |\n'.format(slot1, slot2, slot3)
 
-    ok = discord.Embed(title="Slots Machine", color=discord.Color(0xFFEC))
+    ok = discord.Embed(title="Slots Machine", color=discord.Color(0xa00000))
     ok.add_field(name="{}\nWon".format(slotOutput), value=f'You won {2 * amount} koins')
 
-    won = discord.Embed(title="Slots Machine", color=discord.Color(0xFFEC))
+    won = discord.Embed(title="Slots Machine", color=discord.Color(0xa00000))
     won.add_field(name="{}\nWon".format(slotOutput), value=f'You won {3 * amount} koins')
 
-    lost = discord.Embed(title="Slots Machine", color=discord.Color(0xFFEC))
+    lost = discord.Embed(title="Slots Machine", color=discord.Color(0xa00000))
     lost.add_field(name="{}\nLost".format(slotOutput), value=f'You lost {1 * amount} koins')
 
     if slot1 == slot2 == slot3:
@@ -537,6 +545,53 @@ async def update_bank(user, change=0, mode='wallet'):
 
 #################
 # BYE ECONOMY
+# Hello cool down code
+@slots.error
+async def slots_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
+        await ctx.send(msg)
+    else:
+        raise error
+
+
+@help.error
+async def help_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
+        await ctx.send(msg)
+    else:
+        raise error
+
+
+@daily.error
+async def daily_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'You have already done your daily event, try again 12 hours from your last use!'
+        await ctx.send(msg)
+    else:
+        raise error
+
+
+@fight.error
+async def fight_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'You have already fought recently! Get some rest! Your body will let you fight in 30 minuets!'
+        await ctx.send(msg)
+    else:
+        raise error
+
+
+@beg.error
+async def beg_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
+        await ctx.send(msg)
+    else:
+        raise error
+
+
+#########
 @client.event
 async def on_ready():
     print('Logged in as')
