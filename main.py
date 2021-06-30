@@ -1,23 +1,29 @@
 # Imports
+import asyncio
 import json
 import random
 
 import discord
 from discord.ext import commands
 
-# Todo: bug hunting time.
+# Todo: 8b
+#   hug
+#   say
+#   fight
+#   coinflip
+
 #
 # JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT THE KYOKO (TEST) TOKEN, BUT KYOKO (MAIN) TOKEN
 
 # Credentials
 # TOKEN FOR FOR KYOKO (MAIN) IS ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE
 # TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0
-TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0'
+TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
 
 # Create bot
 client = commands.Bot(command_prefix='k!',
                       activity=discord.Activity(type=discord.ActivityType.watching,
-                                                name="TOO MANY NAGITO EDITS | v0.5.4 | Made by xx-jake-xx#5302  "))
+                                                name="TOO MANY NAGITO EDITS | v0.6.1 | Made by xx-jake-xx#5302  "))
 client.remove_command('help')
 
 # lists for commands
@@ -166,6 +172,19 @@ sidestory_list = ['Kazumi https://images.puella-magi.net/4/4b/PMMMO-KazumiFull.p
                   'Oriko https://images.puella-magi.net/thumb/0/01/Oriko_magia_record_profile.png/300px-Oriko_magia_record_profile.png?20171008175121',
                   'Yuuri https://i.imgur.com/g5Y1Xpg.png']
 
+ball_list = ['It is certain', 'Without a doubt', 'It is decidedly so', 'Yes', 'Most Likely', 'Reply Hazy, Try again',
+             'Ask again later', 'Cannot predict now', 'Concentrate and ask again', 'Dont count on it', 'My Reply Is No',
+             'Outlook not so good', 'Very Doubtful']
+
+hug_gifs = ['https://i.gifer.com/TR2G.gif', 'https://thumbs.gfycat.com/FarAdvancedGrouper-size_restricted.gif',
+            'https://i.gifer.com/LIKl.gif']
+
+fight_gifs = ['https://64.media.tumblr.com/135357ab0c4d347848d9d2a05affa8d0/tumblr_mrocoq7Fz91scsnv1o2_r3_400.gif',
+              'https://i.pinimg.com/originals/4d/17/0d/4d170d8d76741a9c2c1996227b2e18ae.gif',
+              'https://thumbs.gfycat.com/GrizzledMilkyFluke-max-1mb.gif',
+              'https://i.pinimg.com/originals/47/bf/ce/47bfcea600dd3b14eae3a749c5656dbd.gif',
+              'https://64.media.tumblr.com/09c858ef85be3428eb179232869b2458/tumblr_n3cmlwCccm1sial0xo2_500.gif']
+
 
 # ship command
 @client.command()
@@ -214,6 +233,60 @@ async def record(message):
         "Here's a random one... " + random.choice(record_characters) + " is a good pick! (I think..)")
 
 
+# 8b command
+@client.command()
+@commands.cooldown(1.0, 60.0, commands.BucketType.user)
+async def eightball(message):
+    await message.channel.send(random.choice(ball_list))
+
+
+# Hug command
+@client.command()
+@commands.cooldown(1.0, 5.0, commands.BucketType.user)
+async def hug(ctx, *, member: discord.Member = None):
+    try:
+        if member is None:
+            await ctx.send(ctx.message.author.mention + " has been hugged!")
+            await ctx.send(random.choice(hug_gifs))
+        else:
+            if member.id == ctx.message.author.id:
+                await ctx.send(ctx.message.author.mention + "... I can hug you if y-you want?")
+                await asyncio.sleep(1.3)
+                await ctx.send("*sighs* come here.")
+            else:
+                await ctx.send(member.mention + " has been hugged by " + ctx.message.author.mention + "!")
+                await ctx.send(random.choice(hug_gifs))
+
+    except:
+        await ctx.send("Invalid Input")
+
+
+@client.command()
+@commands.cooldown(1.0, 5.0, commands.BucketType.user)
+async def fight(ctx, *, member: discord.Member = None):
+    try:
+        if member is None:
+            await ctx.send(ctx.message.author.mention + " has been challenged to fight!!")
+            await ctx.send(random.choice(fight_gifs))
+        else:
+            if member.id == ctx.message.author.id:
+                await ctx.send(ctx.message.author.mention + "challenges... himself? to fight!")
+            else:
+                await ctx.send(member.mention + " has been challenged to fight by " + ctx.message.author.mention + "!")
+                await ctx.send(random.choice(fight_gifs))
+    except:
+        await ctx.send("Invalid Input")
+
+
+@client.command()
+@commands.cooldown(1.0, 0.5, commands.BucketType.user)
+async def say(ctx, say_text=None):
+    if say_text is None:
+        await ctx.send("I CANT SAY NOTHING STUPID!")
+        return
+    await ctx.send(say_text)
+
+
 # Record Side Command
 @client.command()
 async def recordside(message):
@@ -229,14 +302,13 @@ async def sidestory(message):
 
 @client.command()
 async def changelog(ctx):
-    changelog_embed = discord.Embed(title="Change Log For v0.5.1- v0.5.4", color=0xa80000)
-    changelog_embed.add_field(name="A Economy? ", value=":moneybag: :moneybag:", inline=False)
-    changelog_embed.add_field(name="k!daily", value=":dollar:", inline=False)
-    changelog_embed.add_field(name="k!slots", value=":slot_machine:", inline=False)
-    changelog_embed.add_field(name="k!beg", value=":money_with_wings:", inline=False)
-    changelog_embed.add_field(name="k!fight", value=":crossed_swords: :crossed_swords:", inline=False)
+    changelog_embed = discord.Embed(title="Change Log For v0.6.1", color=0xa80000)
+    changelog_embed.add_field(name="This Update Is More Focused On :sparkles: Fun :sparkles: ", value="Were at 737 lines of code, and we added 4 commands!", inline=False)
+    changelog_embed.add_field(name="k!eightball", value="Ask kyoko a question and she'll pull out her magic 8 ball!", inline=False)
+    changelog_embed.add_field(name="k!hug", value="Hug someone... we all need it", inline=False)
+    changelog_embed.add_field(name="k!fight", value="Challenge someone to fight!", inline=False)
     changelog_embed.add_field(name="Major Revamps and bug fixes", value=":bug: :dizzy_face: ", inline=False)
-    changelog_embed.add_field(name="Cooldowns", value=":clock:", inline=False)
+    changelog_embed.add_field(name="k!say", value="Kyoko will say what ever you want!", inline=False)
     changelog_embed.add_field(name="plz report any bugs to xx-jake-xx#5302... ty", value=":heart:", inline=False)
     await ctx.send(embed=changelog_embed)
 
@@ -252,7 +324,8 @@ async def help(ctx):
     page1.add_field(name="Creator", value="xx-jake-xx#5302 (Only friend/dm me for a bug report, ty)", inline=True)
     page1.set_image(url='https://i.imgur.com/Sz4Ogro.png')
 
-    page2 = discord.Embed(title="Page 2/4 | Commands", color=0xa80000, description="Anime/Other Commands of the Kyoko bot!")
+    page2 = discord.Embed(title="Page 2/4 | Commands", color=0xa80000,
+                          description="Anime/Other Commands of the Kyoko bot!")
     page2.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
     page2.add_field(name="k!help", value="Shows this menu, how impressive.", inline=False)
@@ -280,13 +353,18 @@ async def help(ctx):
     page3.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
 
-    page4 = discord.Embed(title="Page 4/4 | Economy", color=0xa80000,
+    page4 = discord.Embed(title="Page 4/4 | Economy/Fun", color=0xa80000,
                           description="Economy Commands of the Kyoko Discord™ bot!")
     page4.add_field(name="k!wallet", value="Shows your e-wallet! ", inline=True)
     page4.add_field(name="k!beg", value="Beg for some koins!", inline=True)
-    page4.add_field(name="k!fight", value="Fight with a magical girl for koins!", inline=True)
-    page4.add_field(name="k!daily", value="Use this command once per day to hang out with some magical girls!",inline=True)
+    page4.add_field(name="k!patrol", value="Go on witch patrol and maybe get some koins?", inline=True)
+    page4.add_field(name="k!daily", value="Use this command once per day to hang out with some magical girls!",
+                    inline=True)
     page4.add_field(name="k!slots", value="Bet your money in the slot machine! Earn up ", inline=True)
+    page4.add_field(name="k!eightball", value="Kyoko gets out her eight ball!", inline=True)
+    page4.add_field(name="k!fight", value="Fight a user!", inline=True)
+    page4.add_field(name="k!hug", value="Hug a user!", inline=True)
+    page4.add_field(name="k!say", value="I'll say whatever! ", inline=True)
     page4.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
 
@@ -313,7 +391,7 @@ async def help(ctx):
                 i -= 1
                 await message.edit(embed=pages[i])
         elif str(reaction) == '▶':
-            # Make V To add 1 to that number when adding a new emebed page
+            # Make V To add 1 to that number when adding a new embed page
             if i < 3:
                 i += 1
                 await message.edit(embed=pages[i])
@@ -396,6 +474,13 @@ async def daily(ctx):
     user = ctx.author
     users = await get_bank_data()
     daily_earnings = random.randrange(113, 358)
+    seed_chance = ["1", "2", "3", "4", "5"]
+    flipchoice = random.choice(seed_chance)
+    if flipchoice == '1':
+        await ctx.send("oh, you also got a greif seeed")
+        users[str(user.id)]["bank"] += 1
+        with open("bank.json", 'w') as f:
+            json.dump(users, f)
     await ctx.send(
         "Are budget couldn't afford to but custom story embeds, so u got " + str(daily_earnings) + " koins ig")
 
@@ -407,10 +492,19 @@ async def daily(ctx):
 # Fight Command
 @client.command(pass_context=True)
 @commands.cooldown(1.0, 1800.0, commands.BucketType.user)
-async def fight(ctx):
+async def hunt(ctx):
     user = ctx.author
     users = await get_bank_data()
+    seed_chance = ["1", "2", "3", "4", "5", "6", "7", '8', '9', '10', '11',
+                   '12', '13', '14', '15', '16', '17', '18', '19', '20']
+    flipchoice = random.choice(seed_chance)
     fight_earnings = random.randrange(62, 276)
+    if flipchoice == '1':
+        await ctx.send("oh, you also got a greif seed")
+        users[str(user.id)]["bank"] += 1
+        with open("bank.json", 'w') as f:
+            json.dump(users, f)
+
     await ctx.send(
         "Are budget couldn't afford to but custom story embeds, so u got " + str(fight_earnings) + " koins ig")
 
@@ -428,12 +522,14 @@ async def wallet(ctx):
     users = await get_bank_data()
 
     wallet_amt = users[str(user.id)]["wallet"]
+    bank_amt = users[str(user.id)]["bank"]
 
     embed = discord.Embed(title=str(ctx.author.name) + "'s Wallet!!", color=0xa00000)
     embed.set_thumbnail(url=ctx.author.avatar_url)
     embed.add_field(name="Soul Gem Status", value="ok i haven't gotten to death crap so u know in progress",
                     inline=False)
     embed.add_field(name="Koins", value=wallet_amt, inline=False)
+    embed.add_field(name="Greif Seeds", value=bank_amt, inline=False)
     await ctx.send(embed=embed)
 
 
@@ -584,6 +680,42 @@ async def fight_error(ctx, error):
 
 @beg.error
 async def beg_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
+        await ctx.send(msg)
+    else:
+        raise error
+
+
+@eightball.error
+async def eightball_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
+        await ctx.send(msg)
+    else:
+        raise error
+
+
+@hug.error
+async def hug_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
+        await ctx.send(msg)
+    else:
+        raise error
+
+
+@say.error
+async def say_error(ctx, error):
+    if isinstance(error, commands.CommandOnCooldown):
+        msg = 'This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
+        await ctx.send(msg)
+    else:
+        raise error
+
+
+@fight.error
+async def fight_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         msg = 'This command is on a cooldown, please try again in {:.2f}s'.format(error.retry_after)
         await ctx.send(msg)
