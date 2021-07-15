@@ -21,9 +21,11 @@ from discord.ext import commands
 TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
 
 # Create bot
-client = commands.Bot(command_prefix='k!',
+client = commands.Bot(command_prefix='k!')
+activity_string = 'TOO MANY NAGITO EDITS | v0..6.1 | Made by xx-jake-xx#5302 | On {} servers'.format(len(client.guilds))
+client = commands.Bot(command_prefilx='k!',
                       activity=discord.Activity(type=discord.ActivityType.watching,
-                                                name="TOO MANY NAGITO EDITS | v0.6.1 | Made by xx-jake-xx#5302  "))
+                                                name=activity_string)
 client.remove_command('help')
 
 # lists for commands
