@@ -2,30 +2,37 @@
 import asyncio
 import json
 import random
-
+import sys
+import time
+import winsound
+import re
+from winsound import Beep
+import youtube_dl
+import os
 import discord
 from discord.ext import commands
+import typing as t
 
-# Todo: 8b
-#   hug
-#   say
-#   fight
-#   coinflip
 
-#
 # JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT THE KYOKO (TEST) TOKEN, BUT KYOKO (MAIN) TOKEN
 
 # Credentials
 # TOKEN FOR FOR KYOKO (MAIN) IS ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE
 # TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0
+
+
 TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
+client = commands.Bot(command_prefix='k!')
+activity_string = 'TOO MANY NAGITO EDITS | v0.7.1 | Made by xx-jake-xx#5302 | On {} servers'.format(len(client.guilds))
+client = commands.Bot(command_prefix='k!',
+                      activity=discord.Activity(type=discord.ActivityType.watching,
+                                                name=activity_string))
+
+if TOKEN == 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0' or 'ODY3NTM4MzgzOTcwODkzODc0.YPikFA.EYQnwhTsUIwTHWtJ1zJKkxnBOag':
+  sys.exit("Sys.Error.Invoke.Wrong_Token: In Line 16, The Token Provided Is Incorrect: Please Change It To Kyoko (Main)")
 
 # Create bot
-client = commands.Bot(command_prefix='k!')
-activity_string = 'TOO MANY NAGITO EDITS | v0..6.1 | Made by xx-jake-xx#5302 | On {} servers'.format(len(client.guilds))
-client = commands.Bot(command_prefilx='k!',
-                      activity=discord.Activity(type=discord.ActivityType.watching,
-                                                name=activity_string)
+
 client.remove_command('help')
 
 # lists for commands
@@ -114,7 +121,7 @@ record_side = [
     'Meiyui https://gamepress.gg/magiarecord/sites/magiarecord/files/2019-06/meiyui_magical.png',
     'Leila https://images.puella-magi.net/thumb/e/ee/Leila_Ibuki_profile.png/300px-Leila_Ibuki_profile.png?20180312112302',
     'Seika https://images.puella-magi.net/thumb/4/41/Seika_sousui_profile.png/300px-Seika_sousui_profile.png?20180312113204',
-    'Mito https://images.puella-magi.net/thumb/c/c8/Mito_aino_profile.png/300px-Mito_aino_profile.png?20180312111600'
+    'Mito https://images.puella-magi.net/thumb/c/c8/Mito_aino_profile.png/300px-Mito_aino_profile.png?20180312111600',
     'Awane https://images.puella-magi.net/thumb/2/24/Awane_Kokoro_4_star_card.png/300px-Awane_Kokoro_4_star_card.png?20171110123923',
     'Yukika https://images.puella-magi.net/thumb/d/d6/Card_30174_l.png/300px-Card_30174_l.png?20190917154946',
     'Sarasa https://images.puella-magi.net/thumb/7/7c/Sarasa_profile.png/300px-Sarasa_profile.png?20190524145522',
@@ -178,14 +185,16 @@ ball_list = ['It is certain', 'Without a doubt', 'It is decidedly so', 'Yes', 'M
              'Ask again later', 'Cannot predict now', 'Concentrate and ask again', 'Dont count on it', 'My Reply Is No',
              'Outlook not so good', 'Very Doubtful']
 
-hug_gifs = ['https://i.gifer.com/TR2G.gif', 'https://thumbs.gfycat.com/FarAdvancedGrouper-size_restricted.gif',
-            'https://i.gifer.com/LIKl.gif']
+hug_gifs = ['https://i.gifer.com/TR2G.gif', 'https://i.imgur.com/g2bZIB5.gif', 'https://i.imgur.com/2zfSnKk.gif']
 
 fight_gifs = ['https://64.media.tumblr.com/135357ab0c4d347848d9d2a05affa8d0/tumblr_mrocoq7Fz91scsnv1o2_r3_400.gif',
               'https://i.pinimg.com/originals/4d/17/0d/4d170d8d76741a9c2c1996227b2e18ae.gif',
               'https://thumbs.gfycat.com/GrizzledMilkyFluke-max-1mb.gif',
               'https://i.pinimg.com/originals/47/bf/ce/47bfcea600dd3b14eae3a749c5656dbd.gif',
-              'https://64.media.tumblr.com/09c858ef85be3428eb179232869b2458/tumblr_n3cmlwCccm1sial0xo2_500.gif']
+              'https://64.media.tumblr.com/09c858ef85be3428eb179232869b2458/tumblr_n3cmlwCccm1sial0xo2_500.gif',
+              'https://i.imgur.com/0zur1Wf.gif',
+              'https://i.imgur.com/r9uFdoz.gif',
+              'https://i.imgur.com/HL8VJSl.gif']
 
 
 # ship command
@@ -248,16 +257,19 @@ async def eightball(message):
 async def hug(ctx, *, member: discord.Member = None):
     try:
         if member is None:
-            await ctx.send(ctx.message.author.mention + " has been hugged!")
-            await ctx.send(random.choice(hug_gifs))
+            embed = discord.Embed(color=0xa80000)
+            embed.set_author(name=f'{ctx.message.author.display_name} has been hugged!', icon_url=ctx.author.avatar_url)
+            embed.set_image(url=(random.choice(hug_gifs)))
+            await ctx.send(embed=embed)
         else:
             if member.id == ctx.message.author.id:
                 await ctx.send(ctx.message.author.mention + "... I can hug you if y-you want?")
-                await asyncio.sleep(1.3)
-                await ctx.send("*sighs* come here.")
             else:
-                await ctx.send(member.mention + " has been hugged by " + ctx.message.author.mention + "!")
-                await ctx.send(random.choice(hug_gifs))
+                embed = discord.Embed(color=0xa80000)
+                embed.set_author(name=f'{ctx.message.author.display_name} gives {member.display_name} a big hug!',
+                                 icon_url=ctx.author.avatar_url)
+                embed.set_image(url=(random.choice(hug_gifs)))
+                await ctx.send(embed=embed)
 
     except:
         await ctx.send("Invalid Input")
@@ -268,25 +280,33 @@ async def hug(ctx, *, member: discord.Member = None):
 async def fight(ctx, *, member: discord.Member = None):
     try:
         if member is None:
-            await ctx.send(ctx.message.author.mention + " has been challenged to fight!!")
-            await ctx.send(random.choice(fight_gifs))
+            embed = discord.Embed(color=0xa80000)
+            embed.set_author(name=f'{ctx.message.author.display_name} has been challenged to fight!',
+                             icon_url=ctx.author.avatar_url)
+            embed.set_image(url=(random.choice(fight_gifs)))
+            await ctx.send(embed=embed)
         else:
             if member.id == ctx.message.author.id:
-                await ctx.send(ctx.message.author.mention + "challenges... himself? to fight!")
+                await ctx.send(ctx.message.author.mention + "has challenged... themself?? to fight!")
             else:
-                await ctx.send(member.mention + " has been challenged to fight by " + ctx.message.author.mention + "!")
-                await ctx.send(random.choice(fight_gifs))
+                embed = discord.Embed(color=0xa80000)
+                embed.set_author(
+                    name=f'{ctx.message.author.display_name} has challenged {member.display_name} to fight!',
+                    icon_url=ctx.author.avatar_url)
+                embed.set_image(url=(random.choice(fight_gifs)))
+                await ctx.send(embed=embed)
     except:
-        await ctx.send("Invalid Input")
+        await ctx.send("Invlaid Input")
 
 
 @client.command()
 @commands.cooldown(1.0, 0.5, commands.BucketType.user)
-async def say(ctx, say_text=None):
+async def say(message, *, say_text=None):
     if say_text is None:
-        await ctx.send("I CANT SAY NOTHING STUPID!")
+        await message.send("I CANT SAY NOTHING STUPID!")
         return
-    await ctx.send(say_text)
+    message.delete(say_text)
+    await message.send(say_text)
 
 
 # Record Side Command
@@ -305,8 +325,10 @@ async def sidestory(message):
 @client.command()
 async def changelog(ctx):
     changelog_embed = discord.Embed(title="Change Log For v0.6.1", color=0xa80000)
-    changelog_embed.add_field(name="This Update Is More Focused On :sparkles: Fun :sparkles: ", value="Were at 737 lines of code, and we added 4 commands!", inline=False)
-    changelog_embed.add_field(name="k!eightball", value="Ask kyoko a question and she'll pull out her magic 8 ball!", inline=False)
+    changelog_embed.add_field(name="This Update Is More Focused On :sparkles: Fun :sparkles: ",
+                              value="Were at 737 lines of code, and we added 4 commands!", inline=False)
+    changelog_embed.add_field(name="k!eightball", value="Ask kyoko a question and she'll pull out her magic 8 ball!",
+                              inline=False)
     changelog_embed.add_field(name="k!hug", value="Hug someone... we all need it", inline=False)
     changelog_embed.add_field(name="k!fight", value="Challenge someone to fight!", inline=False)
     changelog_embed.add_field(name="Major Revamps and bug fixes", value=":bug: :dizzy_face: ", inline=False)
@@ -352,6 +374,7 @@ async def help(ctx):
     page3.add_field(name="Dance", value="  I'll send a funny gif!", inline=True)
     page3.add_field(name="Sayaka", value="Ill react to any kind of message with the keyword of sayaka", inline=True)
     page3.add_field(name="Kyubey", value="Hehe, f/// you kyubey", inline=True)
+    page3.add_field(name="Tetris", value="(Spoiler Warning, its still good tho)", inline=True)
     page3.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
 
@@ -439,6 +462,10 @@ async def on_message(message):
         await message.channel.send("✨being Meguca is suffering✨")
     if "magical girl" in message.content:
         await message.channel.send("✨being Meguca is suffering✨")
+    if "Magical Girl" in message.content:
+        await message.channel.send("✨being Meguca is suffering✨")
+    if "magical Girl" in message.content:
+        await message.channel.send("✨being Meguca is suffering✨")
     if "meguca" in message.content:
         await message.channel.send("✨being Meguca is suffering✨")
     if "Meguca" in message.content:
@@ -449,7 +476,10 @@ async def on_message(message):
     if "Dance" in message.content:
         await message.channel.send(
             'https://media1.tenor.com/images/2d32f3383f87f8d0822e2e4b327e2537/tenor.gif?itemid=19119793')
-
+    if "Tetris" in message.content:
+        await message.channel.send("https://www.youtube.com/watch?v=nbzoJ98LeiA")
+    if "tetris" in message.content:
+        await message.channel.send("https://www.youtube.com/watch?v=nbzoJ98LeiA")
     if "sayaka" in message.content:
         await message.add_reaction('\U00002764')
     if "Sayaka" in message.content:
@@ -458,6 +488,10 @@ async def on_message(message):
         await message.add_reaction('\U0001F620')
     if "kyubey" in message.content:
         await message.add_reaction('\U0001F620')
+    if "Bebe" in message.content:
+        await message.add_reaction('\U0001F9C0')
+    if "bebe" in message.content:
+        await message.add_reaction('\U0001F9C0')
 
     await client.process_commands(message)
 
@@ -468,7 +502,6 @@ beg_list = ['**Kyosuke**', '**Madoka**', '**Jake XD**', '**Homura**', '**Mami**'
             '**Kyoko**', '**Garfield**']
 
 
-##########
 # Daily Command
 @client.command(pass_context=True)
 @commands.cooldown(1.0, 43200.0, commands.BucketType.user)
@@ -479,7 +512,7 @@ async def daily(ctx):
     seed_chance = ["1", "2", "3", "4", "5"]
     flipchoice = random.choice(seed_chance)
     if flipchoice == '1':
-        await ctx.send("oh, you also got a greif seeed")
+        await ctx.send("oh, you also got a grief seeed")
         users[str(user.id)]["bank"] += 1
         with open("bank.json", 'w') as f:
             json.dump(users, f)
@@ -491,10 +524,10 @@ async def daily(ctx):
         json.dump(users, f)
 
 
-# Fight Command
+# Patrol Command
 @client.command(pass_context=True)
 @commands.cooldown(1.0, 1800.0, commands.BucketType.user)
-async def hunt(ctx):
+async def patrol(ctx):
     user = ctx.author
     users = await get_bank_data()
     seed_chance = ["1", "2", "3", "4", "5", "6", "7", '8', '9', '10', '11',
@@ -502,7 +535,7 @@ async def hunt(ctx):
     flipchoice = random.choice(seed_chance)
     fight_earnings = random.randrange(62, 276)
     if flipchoice == '1':
-        await ctx.send("oh, you also got a greif seed")
+        await ctx.send("oh, you also got a grief seed")
         users[str(user.id)]["bank"] += 1
         with open("bank.json", 'w') as f:
             json.dump(users, f)
@@ -531,7 +564,7 @@ async def wallet(ctx):
     embed.add_field(name="Soul Gem Status", value="ok i haven't gotten to death crap so u know in progress",
                     inline=False)
     embed.add_field(name="Koins", value=wallet_amt, inline=False)
-    embed.add_field(name="Greif Seeds", value=bank_amt, inline=False)
+    embed.add_field(name="Grief Seeds", value=bank_amt, inline=False)
     await ctx.send(embed=embed)
 
 
@@ -554,7 +587,7 @@ async def beg(ctx):
         json.dump(users, f)
 
 
-# Slotss
+# Slots
 @client.command(pass_context=True)
 @commands.cooldown(1.0, 30.0, commands.BucketType.user)
 async def slots(ctx, amount=None):
@@ -572,7 +605,7 @@ async def slots(ctx, amount=None):
         await ctx.send("Amount must be positive")
         return
 
-    slots = ['<:emoji8:859178701094912030>>', '<:emoji2:859178728852160512>', '<:emoji3min:859179625762652201>',
+    slots = ['<:emoji8:859178701094912030>  ', '<:emoji2:859178728852160512>', '<:emoji3min:859179625762652201>',
              '<:emoji4:859178815745949696>', '<:emohi5min:859179597262618624>', '<:emoji6:859178897181376552>',
              '<:emoji7:859178915113336832>']
     slot1 = slots[random.randint(0, 5)]
@@ -607,6 +640,7 @@ async def slots(ctx, amount=None):
 
 
 # Economy technical crap
+###########
 async def open_account(user):
     users = await get_bank_data()
 
@@ -616,10 +650,10 @@ async def open_account(user):
         users[str(user.id)] = {}
         users[str(user.id)]["wallet"] = 0
         users[str(user.id)]["bank"] = 0
+        users[str(user.id)]["soul"] = 0
 
     with open('bank.json', 'w') as f:
         json.dump(users, f)
-
     return True
 
 
@@ -671,8 +705,8 @@ async def daily_error(ctx, error):
         raise error
 
 
-@fight.error
-async def fight_error(ctx, error):
+@patrol.error
+async def patrol_error(ctx, error):
     if isinstance(error, commands.CommandOnCooldown):
         msg = 'You have already fought recently! Get some rest! Your body will let you fight in 30 minuets!'
         await ctx.send(msg)
@@ -725,6 +759,105 @@ async def fight_error(ctx, error):
         raise error
 
 
+########
+# Music Time
+@client.command()
+async def play(ctx, *, query: t.Optional[str]):
+    song_there = os.path.isfile("song.mp3")
+    try:
+        if song_there:
+            os.remove("song.mp3")
+
+    except PermissionError:
+        return
+
+    URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    if voice is None:
+        voiceChannel = discord.utils.get(ctx.guild.voice_channels, name='General')
+        await voiceChannel.connect()
+        voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+
+    query = query.strip("<>")
+    if not re.match(URL_REGEX, query):
+        query = f"ytsearch:{query}"
+
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'quiet': True,
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+    }
+    try:
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([query])
+            query_id = os.popen(f'youtube-dl --get-id "ytsearch:{query}"').read()
+            title = os.popen(f'youtube-dl --get-title "ytsearch:{query_id}"').read()
+            thumbnail_embed = os.popen(f'youtube-dl --get-thumbnail "ytsearch:{query_id}"').read()
+            duration_embed = os.popen(f'youtube-dl --get-duration "ytsearch:{query_id}"').read()
+            embed = discord.Embed(title="Now Playing", color=0xa00000)
+            embed.set_thumbnail(url=thumbnail_embed)
+            embed.add_field(name=title, value=f"`0:00 / {duration_embed}`", inline=True)
+            embed.set_footer(text=f"Requested by {ctx.message.author}")
+            await ctx.send(embed=embed)
+
+    except:
+        print("Trying With Spotify, if none, bad song")
+        os.system(f'spotdl {query}')
+        print("\n" * 100)
+        await ctx.send(f"`Now Playing:` {query}")
+
+    for file in os.listdir("./"):
+        if file.endswith(".mp3"):
+            os.rename(file, "song.mp3")
+
+    if song_there is False:
+        time.sleep(5)
+        await ctx.send("Song not found!")
+
+    print("Playing File (or trying to)")
+
+    voice.play(discord.FFmpegPCMAudio("song.mp3"))
+    voice.source = discord.PCMVolumeTransformer(voice.source)
+    voice.source.volume = 0.50
+
+
+@client.command()
+async def leave(ctx):
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    if voice.is_connected():
+        await voice.disconnect()
+    else:
+        await ctx.send("The bot is not connected to a voice channel.")
+
+
+@client.command()
+async def pause(ctx):
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    if voice.is_playing():
+        voice.pause()
+    else:
+        await ctx.send("Currently no audio is playing.")
+
+
+@client.command()
+async def resume(ctx):
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    if voice.is_paused():
+        voice.resume()
+    else:
+        await ctx.send("The audio is not paused.")
+
+
+@client.command()
+async def stop(ctx):
+    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+    voice.stop()
+
+
 #########
 @client.event
 async def on_ready():
@@ -732,6 +865,14 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+    Beep(500, 700)
+    Beep(800, 700)
+    Beep(1100, 700)
+    Beep(1400, 700)
+    Beep(1700, 1700)
+    filename = 'startup.wav'
+    winsound.PlaySound(filename, winsound.SND_FILENAME)
 
 
+#######
 client.run(TOKEN)
