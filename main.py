@@ -324,15 +324,15 @@ async def sidestory(message):
 
 @client.command()
 async def changelog(ctx):
-    changelog_embed = discord.Embed(title="Change Log For v0.6.1", color=0xa80000)
-    changelog_embed.add_field(name="This Update Is More Focused On :sparkles: Fun :sparkles: ",
-                              value="Were at 737 lines of code, and we added 4 commands!", inline=False)
-    changelog_embed.add_field(name="k!eightball", value="Ask kyoko a question and she'll pull out her magic 8 ball!",
-                              inline=False)
-    changelog_embed.add_field(name="k!hug", value="Hug someone... we all need it", inline=False)
-    changelog_embed.add_field(name="k!fight", value="Challenge someone to fight!", inline=False)
+    changelog_embed = discord.Embed(title="Change Log For v0.7.1", color=0xa80000)
+    changelog_embed.add_field(name="We just did alot fo stuff involving vc's",
+                              value="Were at 879 lines of code, and we added 5 commands!", inline=False)
+    changelog_embed.add_field(name="k!play", value="Plays music (youtube and spotify (link) compatibility", inline=False)
+    changelog_embed.add_field(name="k!pause", value="Pauses the music!", inline=False)
+    changelog_embed.add_field(name="k!resume", value="Resumes the music!", inline=False)
+    changelog_embed.add_field(name="k!stop", value="Stops the music!", inline=False)
+    changelog_embed.add_field(name="k!leave", value="Will leave the vc!", inline=False)
     changelog_embed.add_field(name="Major Revamps and bug fixes", value=":bug: :dizzy_face: ", inline=False)
-    changelog_embed.add_field(name="k!say", value="Kyoko will say what ever you want!", inline=False)
     changelog_embed.add_field(name="plz report any bugs to xx-jake-xx#5302... ty", value=":heart:", inline=False)
     await ctx.send(embed=changelog_embed)
 
@@ -347,8 +347,9 @@ async def help(ctx):
     page1.add_field(name="Bot Invite", value="https://top.gg/bot/853396288162103307", inline=False)
     page1.add_field(name="Creator", value="xx-jake-xx#5302 (Only friend/dm me for a bug report, ty)", inline=True)
     page1.set_image(url='https://i.imgur.com/Sz4Ogro.png')
+    page1.set_footer(text='Page 1/5')
 
-    page2 = discord.Embed(title="Page 2/4 | Commands", color=0xa80000,
+    page2 = discord.Embed(title="Page 2/5 | Commands", color=0xa80000,
                           description="Anime/Other Commands of the Kyoko bot!")
     page2.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
@@ -369,7 +370,7 @@ async def help(ctx):
                     inline=True)
     page2.add_field(name="k!changelog ", value="Its a change log for the latest update!", inline=True)
 
-    page3 = discord.Embed(title="Page 3/4 | Keywords", color=0xa80000, description="Keywords of the Kyoko bot!")
+    page3 = discord.Embed(title="Page 3/5 | Keywords", color=0xa80000, description="Keywords of the Kyoko bot!")
     page3.add_field(name="Madoka/Magical Girl/Meguca", value="It is suffering..", inline=True)
     page3.add_field(name="Dance", value="  I'll send a funny gif!", inline=True)
     page3.add_field(name="Sayaka", value="Ill react to any kind of message with the keyword of sayaka", inline=True)
@@ -378,7 +379,7 @@ async def help(ctx):
     page3.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
 
-    page4 = discord.Embed(title="Page 4/4 | Economy/Fun", color=0xa80000,
+    page4 = discord.Embed(title="Page 4/5 | Economy/Fun", color=0xa80000,
                           description="Economy Commands of the Kyoko Discord™ bot!")
     page4.add_field(name="k!wallet", value="Shows your e-wallet! ", inline=True)
     page4.add_field(name="k!beg", value="Beg for some koins!", inline=True)
@@ -392,8 +393,20 @@ async def help(ctx):
     page4.add_field(name="k!say", value="I'll say whatever! ", inline=True)
     page4.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
-
-    pages = [page1, page2, page3, page4]
+  
+  
+    page5 = discord.Embed(title="Page 5/5 | Music Commands", color=0xa80000,
+                          description="Anime/Other Commands of the Kyoko bot!")
+    page5.add_field(name="k!play", value="Plays music (youtube and spotify (link) compatibility", inline=False)
+    page5.add_field(name="k!pause", value="Pauses the music!", inline=False)
+    page5.add_field(name="k!resume", value="Resumes the music!", inline=False)
+    page5.add_field(name="k!stop", value="Stops the music!", inline=False)
+    page5.add_field(name="k!leave", value="Will leave the vc!", inline=False)
+    page5.set_thumbnail(
+        url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+    
+    
+    pages = [page1, page2, page3, page4, page5]
 
     message = await ctx.send(embed=page1)
     await message.add_reaction('⏮')
@@ -417,12 +430,12 @@ async def help(ctx):
                 await message.edit(embed=pages[i])
         elif str(reaction) == '▶':
             # Make V To add 1 to that number when adding a new embed page
-            if i < 3:
+            if i < 4:
                 i += 1
                 await message.edit(embed=pages[i])
         elif str(reaction) == '⏭':
             #   V same here
-            i = 3
+            i = 4
             await message.edit(embed=pages[i])
 
         try:
