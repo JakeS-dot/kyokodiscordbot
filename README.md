@@ -5,6 +5,4 @@
               
 <p> Kyoko is a discord bot, duh, its basicly my passion project</p>
 
-<p style="font-size:8pt">
-    Why did we use these specific parameters during the calculation of the fingerprints?
-</p>
+<font size=3> Running Off Of Rasbarry Pi Curently (Was oringnaly a Kano Rasbarry Pi 2, (I just wiped its drive and installed rasbarry pi os, lmao) </font>
