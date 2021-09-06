@@ -1,4 +1,3 @@
-# Imports
 import asyncio
 import json
 import random
@@ -23,7 +22,7 @@ import typing as t
 
 TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
 client = commands.Bot(command_prefix='k!')
-activity_string = 'TOO MANY NAGITO EDITS | v0.7.1 | Made by xx-jake-xx#5302 | On {} servers'.format(len(client.guilds))
+activity_string = 'TOO MANY NAGITO EDITS | v0.7.2 | Made by xx-jake-xx#5302 | On {} servers'.format(len(client.guilds))
 client = commands.Bot(command_prefix='k!',
                       activity=discord.Activity(type=discord.ActivityType.watching,
                                                 name=activity_string))
@@ -324,9 +323,9 @@ async def sidestory(message):
 
 @client.command()
 async def changelog(ctx):
-    changelog_embed = discord.Embed(title="Change Log For v0.7.1", color=0xa80000)
+    changelog_embed = discord.Embed(title="Change Log For v0.7.1 - v0.7.2", color=0xa80000)
     changelog_embed.add_field(name="We just did alot fo stuff involving vc's",
-                              value="Were at 879 lines of code, and we added 5 commands!", inline=False)
+                              value="Were at 883 lines of code, and we added 5 commands!", inline=False)
     changelog_embed.add_field(name="k!play", value="Plays music (youtube and spotify (link) compatibility", inline=False)
     changelog_embed.add_field(name="k!pause", value="Pauses the music!", inline=False)
     changelog_embed.add_field(name="k!resume", value="Resumes the music!", inline=False)
@@ -397,11 +396,11 @@ async def help(ctx):
   
     page5 = discord.Embed(title="Page 5/5 | Music Commands", color=0xa80000,
                           description="Anime/Other Commands of the Kyoko bot!")
-    page5.add_field(name="k!play", value="Plays music (youtube and spotify (link) compatibility", inline=False)
+    page5.add_field(name="k!play", value="Plays music (youtube or spotify link, or youtube query) compatibility", inline=False)
     page5.add_field(name="k!pause", value="Pauses the music!", inline=False)
     page5.add_field(name="k!resume", value="Resumes the music!", inline=False)
     page5.add_field(name="k!stop", value="Stops the music!", inline=False)
-    page5.add_field(name="k!leave", value="Will leave the vc!", inline=False)
+    page5.add_field(name="k!leave", value="Kyoko will leave the vc!", inline=False)
     page5.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
     
@@ -878,13 +877,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    Beep(500, 700)
-    Beep(800, 700)
-    Beep(1100, 700)
-    Beep(1400, 700)
-    Beep(1700, 1700)
-    filename = 'startup.wav'
-    winsound.PlaySound(filename, winsound.SND_FILENAME)
 
 
 #######
