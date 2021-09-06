@@ -1,0 +1,6 @@
+python 3.9.0
+Librarys:
+Discord.py
+Youtube-dl
+Spot-dl
+Made by xx-jake-xx#5302 (discord id)
