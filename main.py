@@ -244,7 +244,7 @@ async def record(message):
 
 
 # 8b command
-@client.command()
+@client.command(aliases=['8b'])
 @commands.cooldown(1.0, 60.0, commands.BucketType.user)
 async def eightball(message):
     await message.channel.send(random.choice(ball_list))
@@ -309,13 +309,13 @@ async def say(message, *, say_text=None):
 
 
 # Record Side Command
-@client.command()
+@client.command(aliases=['rs'])
 async def recordside(message):
     await message.channel.send("Here's a random one... " + random.choice(record_side) + " is a good pick! (I think..)")
 
 
 # Side Story Command
-@client.command()
+@client.command(aliases=['ss'])
 async def sidestory(message):
     await message.channel.send(
         "Here's a random one... " + random.choice(sidestory_list) + " is a good pick! (I think..)")
@@ -773,7 +773,7 @@ async def fight_error(ctx, error):
 
 ########
 # Music Time
-@client.command()
+@client.command(aliases=['p'])
 async def play(ctx, *, query: t.Optional[str]):
     song_there = os.path.isfile("song.mp3")
     try:
@@ -837,7 +837,7 @@ async def play(ctx, *, query: t.Optional[str]):
     voice.source.volume = 0.50
 
 
-@client.command()
+@client.command(aliases=['disconnect'])
 async def leave(ctx):
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
     if voice.is_connected():
@@ -855,7 +855,7 @@ async def pause(ctx):
         await ctx.send("Currently no audio is playing.")
 
 
-@client.command()
+@client.command(aliases=['continue'])
 async def resume(ctx):
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
     if voice.is_paused():
