@@ -5,4 +5,4 @@
               
 <p> Kyoko is a discord bot, duh, its basicly my passion project</p>
 
-<font size=3> Running Off Of Rasbarry Pi Curently (Was oringnaly a Kano Rasbarry Pi 2, (I just wiped its drive and installed rasbarry pi os, lmao) </font>
+<font style="font-size:8pt"> Running Off Of Rasbarry Pi Curently (Was oringnaly a Kano Rasbarry Pi 2, (I just wiped its drive and installed rasbarry pi os, lmao) </font>
