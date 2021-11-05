@@ -795,14 +795,19 @@ async def play(ctx, *, query: t.Optional[str]):
         query = f"ytsearch:{query}"
 
     ydl_opts = {
-        'format': 'bestaudio/best',
+        'format': '150',
+        'restrictfilenames': False,
+        'noplaylist': True,
+        'nocheckcertificate': True,
+        'ignoreerrors': False,
+        'logtostderr': False,
         'quiet': True,
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
+        'no_warnings': True,
+        'default_search': 'auto',
+        'source_address': '0.0.0.0',
+        'usenetrc': True
     }
+    
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([query])
