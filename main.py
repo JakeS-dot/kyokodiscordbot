@@ -3,50 +3,6 @@ import json
 import random
 import sys
 import time
-import winsound
-import re
-from winsound import Beep
-import youtube_dl
-import os
-import discord
-from discord.ext import commands
-import typing as t
-
-
-# JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT THE KYOKO (TEST) TOKEN, BUT KYOKO (MAIN) TOKEN
-
-# Credentials
-# TOKEN FOR FOR KYOKO (MAIN) IS ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE
-# TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0
-
-
-TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
-client = commands.Bot(command_prefix='k!')
-activity_string = 'TOO MANY NAGITO EDITS | v0.7.2 | Made by xx-jake-xx#5302 | On {} servers'.format(len(client.guilds))
-client = commands.Bot(command_prefix='k!',
-                      activity=discord.Activity(type=discord.ActivityType.watching,
-                                                name=activity_string))
-
-if TOKEN == 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0' or 'ODY3NTM4MzgzOTcwODkzODc0.YPikFA.EYQnwhTsUIwTHWtJ1zJKkxnBOag':
-  sys.exit("Sys.Error.Invoke.Wrong_Token: In Line 16, The Token Provided Is Incorrect: Please Change It To Kyoko (Main)")
-
-# Create bot
-
-client.remove_command('help')
-
-# lists for commands
-ship_list = ['Madoka Kaname', 'Homura Akemi', 'Sayaka Miki', 'Mami Tomoe', 'Kyo(u)ko Sakura', 'Hitomi Shizuki',
-             'Kyosuke Kamijio']
-ship_dis = ['It would be so intense!', 'A nail biter!', 'Its the best pick I got!']
-place_sur = ['3rd', '2nd', ]
-death_sur = ['became a witch.', 'had your soul gem destroyed.', 'were killed by a witch. ']
-
-magica_characters = [
-    'Kyosuke https://static.wikia.nocookie.net/madoka/images/8/87/KyosukeCharacterDesignWebsite.png/revision/latest/scale-to-width/360?cb=20150715030458',import asyncio
-import json
-import random
-import sys
-import time
 import re
 import youtube_dl
 import os
@@ -54,7 +10,6 @@ import discord
 from discord.ext import commands
 import typing as t
 from discord.utils import find, get
-
 
 # JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT THE KYOKO (TEST) TOKEN, BUT KYOKO (MAIN) TOKEN
 
@@ -236,7 +191,7 @@ fight_gifs = ['https://64.media.tumblr.com/135357ab0c4d347848d9d2a05affa8d0/tumb
 
 
 # ship command
-@client.command()
+@ client.command()
 async def ship(ctx):
     ship_cmd = discord.Embed(title=('In my opinion, ' + (random.choice(ship_list)) + ' and ' + (
         random.choice(ship_list)) + ' would be a great ship!'), color=0xa00000)
@@ -364,7 +319,8 @@ async def changelog(ctx):
     changelog_embed = discord.Embed(title="Change Log For v0.7.1 - v0.7.2", color=0xa80000)
     changelog_embed.add_field(name="We just did alot fo stuff involving vc's",
                               value="Were at 883 lines of code, and we added 5 commands!", inline=False)
-    changelog_embed.add_field(name="k!play", value="Plays music (youtube and spotify (link) compatibility", inline=False)
+    changelog_embed.add_field(name="k!play", value="Plays music (youtube and spotify (link) compatibility",
+                              inline=False)
     changelog_embed.add_field(name="k!pause", value="Pauses the music!", inline=False)
     changelog_embed.add_field(name="k!resume", value="Resumes the music!", inline=False)
     changelog_embed.add_field(name="k!stop", value="Stops the music!", inline=False)
@@ -382,7 +338,9 @@ async def help(ctx):
                           description="Hello! I am Kyoko Sakura, you know, that magical girl from Madoka Magica.. I hope to serve you well in your server, to entertain, to laugh at, to crush your poor little heart. I can do over 15 commands and keywords! The creator (me) has worked very, very hard on this. I hope I did my best, and I hope I can give you a bot of a lifetime... ",
                           color=0xa80000)
     page1.add_field(name="Bot Invite", value="https://top.gg/bot/853396288162103307", inline=False)
-    page1.add_field(name="Creator", value="xx-jake-xx#5302 (Only friend/dm me for a bug report, ty) also page 5 disabled for a bit", inline=True)
+    page1.add_field(name="Creator",
+                    value="xx-jake-xx#5302 (Only friend/dm me for a bug report, ty) also page 5 disabled for a bit",
+                    inline=True)
     page1.set_image(url='https://i.imgur.com/Sz4Ogro.png')
     page1.set_footer(text='Page 1/5')
 
@@ -430,19 +388,18 @@ async def help(ctx):
     page4.add_field(name="k!say", value="I'll say whatever! ", inline=True)
     page4.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
-  
-  
+
     page5 = discord.Embed(title="Page 5/5 | Music Commands", color=0xa80000,
                           description="Anime/Other Commands of the Kyoko bot!")
-    page5.add_field(name="k!play", value="Plays music (youtube or spotify link, or youtube query) compatibility", inline=False)
+    page5.add_field(name="k!play", value="Plays music (youtube or spotify link, or youtube query) compatibility",
+                    inline=False)
     page5.add_field(name="k!pause", value="Pauses the music!", inline=False)
     page5.add_field(name="k!resume", value="Resumes the music!", inline=False)
     page5.add_field(name="k!stop", value="Stops the music!", inline=False)
     page5.add_field(name="k!leave", value="Kyoko will leave the vc!", inline=False)
     page5.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
-    
-    
+
     pages = [page1, page2, page3, page4]
 
     message = await ctx.send(embed=page1)
@@ -845,7 +802,7 @@ async def play(ctx, *, query: t.Optional[str]):
         'source_address': '0.0.0.0',
         'usenetrc': True
     }
-        
+
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([query])
@@ -871,25 +828,20 @@ async def play(ctx, *, query: t.Optional[str]):
     def is_connected(ctx):
         voice_client = get(ctx.bot.voice_clients, guild=ctx.guild)
         return voice_client and voice_client.is_connected()
-    
+
     if is_connected(ctx):
         return
-    
+
     else:
         voiceChannel = ctx.message.author.voice.channel
         await voiceChannel.connect()
         print("reconnected to voice")
-
-
 
     if song_there is False:
         time.sleep(5)
         await ctx.send("Song not found!")
 
     print("Playing File (or trying to)")
-    
-    
-    
 
     voice.play(discord.FFmpegPCMAudio("song.mp3"))
     voice.source = discord.PCMVolumeTransformer(voice.source)
