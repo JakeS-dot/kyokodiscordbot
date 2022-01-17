@@ -18,7 +18,7 @@ from discord.utils import find, get
 # TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0
 
 
-TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
+TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0'
 client = commands.Bot(command_prefix='k!')
 activity_string = 'TOO MANY NAGITO EDITS | v0.7.2 | Made by xx-jake-xx#5302 | On {} servers'.format(len(client.guilds))
 client = commands.Bot(command_prefix='k!',
