@@ -1,29 +1,39 @@
-import asyncio
-import json
+  import json
 import random
-import sys
-import time
 import re
-import youtube_dl
-import os
 import discord
 from discord.ext import commands
-import typing as t
-from discord.utils import find, get
+
+from music import Music
 
 # JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT THE KYOKO (TEST) TOKEN, BUT KYOKO (MAIN) TOKEN
 
 # Credentials
 # TOKEN FOR FOR KYOKO (MAIN) IS ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE
-# TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.YLdunQ.-MfU88k5sPNxQ0svpuNlDLRNTS0
+# TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.GEHBT1.Hr3as5fnobnrE1BTFEEF-z_urypkJrwkUiM82Y
 
 
-TOKEN = 'ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE'
+TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.GEHBT1.Hr3as5fnobnrE1BTFEEF-z_urypkJrwkUiM82Y'
 client = commands.Bot(command_prefix='k!')
-activity_string = 'TOO MANY NAGITO EDITS | v0.7.2 | Made by xx-jake-xx#5302 | On {} servers'.format(len(client.guilds))
+intents = discord.Intents.default()
+intents.members = True
+activity_string = 'TOO MANY NAGITO EDITS | v0.8.1 | Made by xx-jake-xx#5302 | On {} servers'.format(len(client.guilds))
 client = commands.Bot(command_prefix='k!',
-                      activity=discord.Activity(type=discord.ActivityType.watching,
-                                                name=activity_string))
+                      activity=discord.Activity(type=discord.ActivityType.watching, name=activity_string),
+                      intents=intents)
+
+
+@client.event
+async def on_server_join():
+    for guild in client.guilds:
+        for channel in guild.text_channels:
+            if channel.permissions_for(guild.me).say:
+                message = guild.owner
+                channel = await message.create_dm()
+                await channel.send(
+                    "Hi! Im kyoko! I use k! prefix, if some commands dont work double check my permissions :heart:! Thank for using me, contact support at xx-jake-xx#5302")
+
+
 # Create bot
 
 client.remove_command('help')
@@ -191,7 +201,7 @@ fight_gifs = ['https://64.media.tumblr.com/135357ab0c4d347848d9d2a05affa8d0/tumb
 
 
 # ship command
-@ client.command()
+@client.command()
 async def ship(ctx):
     ship_cmd = discord.Embed(title=('In my opinion, ' + (random.choice(ship_list)) + ' and ' + (
         random.choice(ship_list)) + ' would be a great ship!'), color=0xa00000)
@@ -223,8 +233,8 @@ async def magica(message):
         "Here's a random one... " + random.choice(magica_characters) + " is a good character! (I think..)")
 
 
-# Rebellion command
-@client.command()
+# Rebellion command, aliases: reb and rebellion
+@client.command(aliases=['reb'])
 async def rebellion(message):
     await message.channel.send(
         "Here's a random one... " + random.choice(rebellion_characters) + " is a good pick! (I think..)")
@@ -289,7 +299,7 @@ async def fight(ctx, *, member: discord.Member = None):
                 embed.set_image(url=(random.choice(fight_gifs)))
                 await ctx.send(embed=embed)
     except:
-        await ctx.send("Invlaid Input")
+        await ctx.send("Invalid Input")
 
 
 @client.command()
@@ -316,15 +326,9 @@ async def sidestory(message):
 
 @client.command()
 async def changelog(ctx):
-    changelog_embed = discord.Embed(title="Change Log For v0.7.1 - v0.7.2", color=0xa80000)
-    changelog_embed.add_field(name="We just did alot fo stuff involving vc's",
-                              value="Were at 883 lines of code, and we added 5 commands!", inline=False)
-    changelog_embed.add_field(name="k!play", value="Plays music (youtube and spotify (link) compatibility",
-                              inline=False)
-    changelog_embed.add_field(name="k!pause", value="Pauses the music!", inline=False)
-    changelog_embed.add_field(name="k!resume", value="Resumes the music!", inline=False)
-    changelog_embed.add_field(name="k!stop", value="Stops the music!", inline=False)
-    changelog_embed.add_field(name="k!leave", value="Will leave the vc!", inline=False)
+    changelog_embed = discord.Embed(title="Changelog v0.8.1!", description="Finished Music Commands (took a year)")
+    changelog_embed.add_field(name="Lines of code", value="1086", inline=False)
+    changelog_embed.add_field(name="New commands:", value="In help menu page 5", inline=True)
     changelog_embed.add_field(name="Major Revamps and bug fixes", value=":bug: :dizzy_face: ", inline=False)
     changelog_embed.add_field(name="plz report any bugs to xx-jake-xx#5302... ty", value=":heart:", inline=False)
     await ctx.send(embed=changelog_embed)
@@ -339,7 +343,7 @@ async def help(ctx):
                           color=0xa80000)
     page1.add_field(name="Bot Invite", value="https://top.gg/bot/853396288162103307", inline=False)
     page1.add_field(name="Creator",
-                    value="xx-jake-xx#5302 (Only friend/dm me for a bug report, ty) also page 5 disabled for a bit",
+                    value="xx-jake-xx#5302 (Only friend/dm me for a bug report, ty)",
                     inline=True)
     page1.set_image(url='https://i.imgur.com/Sz4Ogro.png')
     page1.set_footer(text='Page 1/5')
@@ -389,18 +393,24 @@ async def help(ctx):
     page4.set_thumbnail(
         url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
 
-    page5 = discord.Embed(title="Page 5/5 | Music Commands", color=0xa80000,
-                          description="Anime/Other Commands of the Kyoko bot!")
-    page5.add_field(name="k!play", value="Plays music (youtube or spotify link, or youtube query) compatibility",
-                    inline=False)
-    page5.add_field(name="k!pause", value="Pauses the music!", inline=False)
-    page5.add_field(name="k!resume", value="Resumes the music!", inline=False)
-    page5.add_field(name="k!stop", value="Stops the music!", inline=False)
-    page5.add_field(name="k!leave", value="Kyoko will leave the vc!", inline=False)
-    page5.set_thumbnail(
-        url="https://cdn.discordapp.com/avatars/844706643936935987/f1d040d84ee02cfcf643465297571f26.png?size=128")
+    page5 = discord.Embed(title="Page 5/5 | Music Commands", description="Anime/Other Commands of the Kyoko bot!",
+                          color=0xa00000)
+    page5.add_field(name="k!play", value="Plays any song!", inline=True)
+    page5.add_field(name="k!seek", value="Seeks to a given position in a track!", inline=True)
+    page5.add_field(name="k!forceskip", value="(Admin only)  Force skips a song", inline=True)
+    page5.add_field(name="k!stop", value="Stops the song!", inline=True)
+    page5.add_field(name="k!now", value="Says whats playing now!", inline=True)
+    page5.add_field(name="k!queue", value="Shows current queue!", inline=True)
+    page5.add_field(name="k!pause", value="Pauses the song!", inline=True)
+    page5.add_field(name="k!volume", value="Change the volume!", inline=True)
+    page5.add_field(name="k!shuffle", value="Shuffle the queue!", inline=True)
+    page5.add_field(name="k!loop", value="Turns on loop song!", inline=True)
+    page5.add_field(name="k!remove", value="Remove a song from the queue!", inline=True)
+    page5.add_field(name="k!find", value="Searchs a song!", inline=True)
+    page5.add_field(name="k!disconnect", value="Disconnects Kyoko from the vc!", inline=True)
+    await ctx.send(embed=page5)
 
-    pages = [page1, page2, page3, page4]
+    pages = [page1, page2, page3, page4, page5]
 
     message = await ctx.send(embed=page1)
     await message.add_reaction('⏮')
@@ -424,12 +434,12 @@ async def help(ctx):
                 await message.edit(embed=pages[i])
         elif str(reaction) == '▶':
             # Make V To add 1 to that number when adding a new embed page
-            if i < 3:
+            if i < 4:
                 i += 1
                 await message.edit(embed=pages[i])
         elif str(reaction) == '⏭':
             #   V same here
-            i = 3
+            i = 4
             await message.edit(embed=pages[i])
 
         try:
@@ -461,45 +471,23 @@ async def on_message(message):
     if message.author == client.user:
         return
     if message.author.bot: return
-    if "Madoka" in message.content:
+    if re.search('madoka', message.content, re.IGNORECASE):
         await message.channel.send("✨being Meguca is suffering✨")
-    if "madoka" in message.content:
+    if re.search('magical girl', message.content, re.IGNORECASE):
         await message.channel.send("✨being Meguca is suffering✨")
-    if "Magical girl" in message.content:
+    if re.search('meguca', message.content, re.IGNORECASE):
         await message.channel.send("✨being Meguca is suffering✨")
-    if "magical girl" in message.content:
-        await message.channel.send("✨being Meguca is suffering✨")
-    if "Magical Girl" in message.content:
-        await message.channel.send("✨being Meguca is suffering✨")
-    if "magical Girl" in message.content:
-        await message.channel.send("✨being Meguca is suffering✨")
-    if "meguca" in message.content:
-        await message.channel.send("✨being Meguca is suffering✨")
-    if "Meguca" in message.content:
-        await message.channel.send("✨being Meguca is suffering✨")
-    if "dance" in message.content:
+    if re.search('dance', message.content, re.IGNORECASE):
         await message.channel.send(
-            'https://media1.tenor.com/images/2d32f3383f87f8d0822e2e4b327e2537/tenor.gif?itemid=19119793')
-    if "Dance" in message.content:
-        await message.channel.send(
-            'https://media1.tenor.com/images/2d32f3383f87f8d0822e2e4b327e2537/tenor.gif?itemid=19119793')
-    if "Tetris" in message.content:
-        await message.channel.send("https://www.youtube.com/watch?v=nbzoJ98LeiA")
-    if "tetris" in message.content:
-        await message.channel.send("https://www.youtube.com/watch?v=nbzoJ98LeiA")
-    if "sayaka" in message.content:
+            "https://media1.tenor.com/images/2d32f3383f87f8d0822e2e4b327e2537/tenor.gif?itemid=19119793")
+    if re.search('tetris', message.content, re.IGNORECASE):
+        await message.channel.send(f"spoilers btw ||https://www.youtube.com/watch?v=nbzoJ98LeiA||")
+    if re.search('sayaka', message.content, re.IGNORECASE):
         await message.add_reaction('\U00002764')
-    if "Sayaka" in message.content:
-        await message.add_reaction('\U00002764')
-    if "Kyubey" in message.content:
+    if re.search('kyubey', message.content, re.IGNORECASE):
         await message.add_reaction('\U0001F620')
-    if "kyubey" in message.content:
-        await message.add_reaction('\U0001F620')
-    if "Bebe" in message.content:
+    if re.search('bebe', message.content, re.IGNORECASE):
         await message.add_reaction('\U0001F9C0')
-    if "bebe" in message.content:
-        await message.add_reaction('\U0001F9C0')
-
     await client.process_commands(message)
 
 
@@ -519,7 +507,7 @@ async def daily(ctx):
     seed_chance = ["1", "2", "3", "4", "5"]
     flipchoice = random.choice(seed_chance)
     if flipchoice == '1':
-        await ctx.send("oh, you also got a grief seeed")
+        await ctx.send("oh, you also got a grief seed")
         users[str(user.id)]["bank"] += 1
         with open("bank.json", 'w') as f:
             json.dump(users, f)
@@ -566,7 +554,7 @@ async def wallet(ctx):
     wallet_amt = users[str(user.id)]["wallet"]
     bank_amt = users[str(user.id)]["bank"]
 
-    embed = discord.Embed(title=str(ctx.author.name) + "'s Wallet!!", color=0xa00000)
+    embed = discord.Embed(title=str(ctx.author) + "'s Wallet!!", color=0xa00000)
     embed.set_thumbnail(url=ctx.author.avatar_url)
     embed.add_field(name="Soul Gem Status", value="ok i haven't gotten to death crap so u know in progress",
                     inline=False)
@@ -767,128 +755,23 @@ async def fight_error(ctx, error):
 
 
 ########
-# Music Time
-@client.command(aliases=['p'])
-async def play(ctx, *, query: t.Optional[str]):
-    song_there = os.path.isfile("song.mp3")
-    try:
-        if song_there:
-            os.remove("song.mp3")
-
-    except PermissionError:
-        return
-
-    URL_REGEX = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    if voice is None:
-        voiceChannel = ctx.message.author.voice.channel
-        await voiceChannel.connect()
-        voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-
-    query = query.strip("<>")
-    if not re.match(URL_REGEX, query):
-        query = f"ytsearch:{query}"
-
-    ydl_opts = {
-        'format': '150',
-        'restrictfilenames': False,
-        'noplaylist': True,
-        'nocheckcertificate': True,
-        'ignoreerrors': False,
-        'logtostderr': False,
-        'quiet': True,
-        'no_warnings': True,
-        'default_search': 'auto',
-        'source_address': '0.0.0.0',
-        'usenetrc': True
-    }
-
-    try:
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([query])
-            query_id = os.popen(f'youtube-dl --get-id "ytsearch:{query}"').read()
-            title = os.popen(f'youtube-dl --get-title "ytsearch:{query_id}"').read()
-            thumbnail_embed = os.popen(f'youtube-dl --get-thumbnail "ytsearch:{query_id}"').read()
-            duration_embed = os.popen(f'youtube-dl --get-duration "ytsearch:{query_id}"').read()
-            embed = discord.Embed(title="Now Playing", color=0xa00000)
-            embed.set_thumbnail(url=thumbnail_embed)
-            embed.add_field(name=title, value=f"`0:00 / {duration_embed}`", inline=True)
-            embed.set_footer(text=f"Requested by {ctx.message.author}")
-            await ctx.send(embed=embed)
-
-    except:
-        print("Trying With Spotify, if none, bad song")
-        os.system(f'spotdl {query}')
-        await ctx.send(f"`Now Playing:` {query}")
-
-    for file in os.listdir("./"):
-        if file.endswith(".mp3"):
-            os.rename(file, "song.mp3")
-
-    def is_connected(ctx):
-        voice_client = get(ctx.bot.voice_clients, guild=ctx.guild)
-        return voice_client and voice_client.is_connected()
-
-    if is_connected(ctx):
-        return
-
-    else:
-        voiceChannel = ctx.message.author.voice.channel
-        await voiceChannel.connect()
-        print("reconnected to voice")
-
-    if song_there is False:
-        time.sleep(5)
-        await ctx.send("Song not found!")
-
-    print("Playing File (or trying to)")
-
-    voice.play(discord.FFmpegPCMAudio("song.mp3"))
-    voice.source = discord.PCMVolumeTransformer(voice.source)
-    voice.source.volume = 0.50
 
 
-@client.command(aliases=['disconnect'])
-async def leave(ctx):
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    if voice.is_connected():
-        await voice.disconnect()
-    else:
-        await ctx.send("The bot is not connected to a voice channel.")
+# ############# Start Card System ############ #
+# Store in mabey like a sql???
+# AWS
 
 
-@client.command()
-async def pause(ctx):
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    if voice.is_playing():
-        voice.pause()
-    else:
-        await ctx.send("Currently no audio is playing.")
-
-
-@client.command(aliases=['continue'])
-async def resume(ctx):
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    if voice.is_paused():
-        voice.resume()
-    else:
-        await ctx.send("The audio is not paused.")
-
-
-@client.command()
-async def stop(ctx):
-    voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
-    voice.stop()
-
-
-#########
+###############
 @client.event
 async def on_ready():
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
     print('------')
+    client.add_cog(Music(client))
 
 
 #######
 client.run(TOKEN)
+
