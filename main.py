@@ -6,14 +6,10 @@ from discord.ext import commands
 
 from music import Music
 
-# JAKE REMINDER TO CHANGE THE TOKEN IF YOUR COPY AND PASTING THE CODE! CHANGE IT FROM NOT THE KYOKO (TEST) TOKEN, BUT KYOKO (MAIN) TOKEN
-
-# Credentials
-# TOKEN FOR FOR KYOKO (MAIN) IS ODUzMzk2Mjg4MTYyMTAzMzA3.YMUxOg.cg1IbTAlJwXRxjiacHkN4oL3CBE
-# TOKEN FOR KYOKO (TEST) IS ODQ5NjEzOTEyMDI1OTg5MTUw.GEHBT1.Hr3as5fnobnrE1BTFEEF-z_urypkJrwkUiM82Y
 
 
-TOKEN = 'ODQ5NjEzOTEyMDI1OTg5MTUw.GEHBT1.Hr3as5fnobnrE1BTFEEF-z_urypkJrwkUiM82Y'
+
+TOKEN = 'no'
 client = commands.Bot(command_prefix='k!')
 intents = discord.Intents.default()
 intents.members = True
